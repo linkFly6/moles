@@ -1,0 +1,36 @@
+<section id="content-block">
+    <div class="form-group">
+        <textarea class="form-control compress-code" rows="6" id="oldCodeSource"></textarea>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-default" id="btnCompressor">&nbsp;&nbsp;Ñ¹&nbsp;&nbsp;Ëõ&nbsp;&nbsp;</button>
+    </div>
+    <div class="form-group">
+        <textarea class="form-control compress-code" rows="6" id="newCodeSource"></textarea>
+    </div>
+    <script>
+        $(function () {
+
+            
+            var $oldCodeSource = $('#oldCodeSource'),
+                $newCodeSource = $('#newCodeSource'),
+                $btnCompressor = $('#btnCompressor');
+
+            var ipc = require('ipc');
+
+
+            $btnCompressor.on('click', function () {
+                var oldValue = $oldCodeSource.val().trim();
+                if (oldValue.length) {
+                    ipc.send('async-compressor', oldValue);
+                }
+            });
+            //Ñ¹ËõÍê³É
+            ipc.on('async-compressor-reply', function (value) {
+                if (value != null) {
+                    $newCodeSource.val(value);
+                }
+            });
+        });
+    </script>
+</section>

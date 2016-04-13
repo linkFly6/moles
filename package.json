@@ -7,14 +7,17 @@
     "test": "npm test"
   },
   "repository": {
-  "type": "git",
-  "url": "git@github.com:linkFly6/moles.git"
-},
+    "type": "git",
+    "url": "git@github.com:linkFly6/moles.git"
+  },
   "keywords": [
     "web",
     "tool",
     "webDev"
   ],
   "author": "linkFly",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.10.0"
+  }
 }
