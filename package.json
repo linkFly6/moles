@@ -1,0 +1,20 @@
+{
+  "name": "moles",
+  "version": "0.0.1",
+  "description": "VR前端集成基础工具",
+  "main": "main.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+  "type": "git",
+  "url": "git@github.com:linkFly6/moles.git"
+},
+  "keywords": [
+    "web",
+    "tool",
+    "webDev"
+  ],
+  "author": "linkFly",
+  "license": "MIT"
+}
