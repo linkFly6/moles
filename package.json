@@ -18,6 +18,10 @@
   "author": "linkFly",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.10.0"
+    "lodash": "^4.10.0",
+    "yuicompressor": "^2.4.8"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^0.37.5"
   }
 }
