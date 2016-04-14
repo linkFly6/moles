@@ -1,6 +1,6 @@
 ﻿var app = require('app');  // 控制应用生命周期的模块。
 var BrowserWindow = require('browser-window');  // 创建原生浏览器窗口的模块
-const ipc = require('ipc');//进程通讯模块
+const ipcMain = require('electron').ipcMain;//进程通讯模块
 const compressor = require('yuicompressor');//yui压缩引擎
 const _ = require('lodash');
 
@@ -48,7 +48,7 @@ app.on('ready', function () {
     });
 
     //监听压缩机制
-    ipc.on('async-compressor', function (event, arg) {
+    ipcMain.on('async-compressor', function (event, arg) {
         if (typeof arg === 'string') {
             compressor.compress(arg, {
                 charset: 'utf8',//指定读取输入文件使用的编码

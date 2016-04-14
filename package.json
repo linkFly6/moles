@@ -22,6 +22,7 @@
     "yuicompressor": "^2.4.8"
   },
   "devDependencies": {
-    "electron-prebuilt": "^0.37.5"
+    "electron-prebuilt": "^0.37.5",
+    "gulp": "^3.9.1"
   }
 }

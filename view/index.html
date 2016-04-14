@@ -67,6 +67,7 @@
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:;">选项</a></li>
                                 <li><a href="javascript:;">插件</a></li>
+                                <li><a href="javascript:;">检查更新</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="javascript:;">关于</a></li>
                             </ul>
@@ -85,29 +86,31 @@
         (function () {
             'use strict';
             var app = angular.module('app', ['ngRoute']),
-                ipc = require('ipc');
-            app.controller('simple-Compressor-ctr', function ($scope) {
+                ipcRenderer = require('electron').ipcRenderer;
+            app.controller('simple-Compressor-ctr', ['$scope', '$timeout', function ($scope, $timeout) {
                 $scope.oldCodeSource = $scope.newCodeSource = '';
                 $scope.compressor = function () {
                     var oldValue = $scope.oldCodeSource.trim();
                     if (oldValue.length) {
-                        ipc.send('async-compressor', oldValue);
+                        ipcRenderer.send('async-compressor', oldValue);
                     }
                 }
                 //压缩完成
-                ipc.on('async-compressor-reply', function (value) {
+                ipcRenderer.on('async-compressor-reply', function (event, value) {
                     if (value != null) {
-                        $scope.newCodeSource = value;
+                        $scope.$apply(function () {
+                            $scope.newCodeSource = value;
+                        });
                     }
                 });
-            });
+            }]);
             app.config(function ($routeProvider, $locationProvider) {
-                $routeProvider.when('/simCom', {
+                $routeProvider.when('/', {
+                    template: "<h2>这个是默认的模板哦</h2>"
+                }).when('/simCom', {
                     templateUrl: 'quickcompress.html',
                     controller: 'simple-Compressor-ctr'
-                }).otherwise({
-                    template: "<h2>这个是默认的模板哦</h2>"
-                });
+                }).otherwise('/');//默认路由
             });
         })();
 
