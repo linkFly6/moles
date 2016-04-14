@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
     <title>moles - 前端桌面集成工具</title>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -7,9 +7,10 @@
     <link href="../src/css/main.css" rel="stylesheet">
     <script src="../src/javascripts/jquery.min.js"></script>
     <script src="../src/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../src/vue/vue.js"></script>
-    <script src="../src/vue/vue-router.js"></script>
-
+    <!--<script src="../src/vue/vue.js"></script>-->
+    <!--<script src="../src/vue/vue-router.js"></script>-->
+    <script src="../src/javascripts/angularJS.js"></script>
+    <script src="../src/javascripts/angular-route.min.js"></script>
 </head>
 <body>
     <div id="app">
@@ -28,7 +29,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">首页</a></li>
+                        <li class="active"><a href="javascript:;">首页</a></li>
                         <li class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">编译 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -42,7 +43,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">压缩 <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="quickCompressor.html">快速压缩(js/css)</a></li>
+                                <li><a href="#/simCom">快速压缩(js/css)</a></li>
                                 <li><a href="javascript:;">配置压缩(js/css)</a></li>
                             </ul>
                         </li>
@@ -75,13 +76,41 @@
             </div><!-- /.container-fluid -->
         </nav>
         <section id="content">
-            <router-view></router-view>
+            <ng-view></ng-view>
         </section>
         <footer></footer>
     </div>
     <script>
-        var router = new VueRouter();
-        //quickcompress.html
+
+        (function () {
+            'use strict';
+            var app = angular.module('app', ['ngRoute']),
+                ipc = require('ipc');
+            app.controller('simple-Compressor-ctr', function ($scope) {
+                $scope.oldCodeSource = $scope.newCodeSource = '';
+                $scope.compressor = function () {
+                    var oldValue = $scope.oldCodeSource.trim();
+                    if (oldValue.length) {
+                        ipc.send('async-compressor', oldValue);
+                    }
+                }
+                //压缩完成
+                ipc.on('async-compressor-reply', function (value) {
+                    if (value != null) {
+                        $scope.newCodeSource = value;
+                    }
+                });
+            });
+            app.config(function ($routeProvider, $locationProvider) {
+                $routeProvider.when('/simCom', {
+                    templateUrl: 'quickcompress.html',
+                    controller: 'simple-Compressor-ctr'
+                }).otherwise({
+                    template: "<h2>这个是默认的模板哦</h2>"
+                });
+            });
+        })();
+
     </script>
 </body>
 
