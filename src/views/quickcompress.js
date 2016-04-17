@@ -1,7 +1,5 @@
 ﻿(function () {
     'use strict';
-    var app = angular.module('app'),
-        ipcRenderer = require('electron').ipcRenderer;
     app.controller('simple-Compressor-ctr', ['$scope', '$timeout', function ($scope, $timeout) {
         $scope.oldCodeSource = $scope.newCodeSource = '';
         $scope.compressor = function () {

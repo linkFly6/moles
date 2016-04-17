@@ -1,6 +1,4 @@
-var app = angular.module('app', ['ngRoute']),
-    ipcRenderer = require('electron').ipcRenderer;
-(function () {
+﻿(function () {
     'use strict';
     app.controller('index-ctr', ['$scope', '$timeout', function ($scope, $timeout) {
         //当前焦点图索引
@@ -49,36 +47,4 @@ var app = angular.module('app', ['ngRoute']),
 
         
     }]);
-})();
-(function () {
-    'use strict';
-    app.controller('simple-Compressor-ctr', ['$scope', '$timeout', function ($scope, $timeout) {
-        $scope.oldCodeSource = $scope.newCodeSource = '';
-        $scope.compressor = function () {
-            var oldValue = $scope.oldCodeSource.trim();
-            if (oldValue.length) {
-                ipcRenderer.send('async-compressor', oldValue);
-            }
-        }
-        //压缩完成
-        ipcRenderer.on('async-compressor-reply', function (event, value) {
-            if (value != null) {
-                $scope.$apply(function () {
-                    $scope.newCodeSource = value;
-                });
-            }
-        });
-    }]);
-})();
-(function () {
-    //注册路由
-    app.config(function ($routeProvider, $locationProvider) {
-        $routeProvider.when('/', {
-            templateUrl: "index.html",
-            controller: 'index-ctr'
-        }).when('/simCom', {
-            templateUrl: 'quickcompress.html',
-            controller: 'simple-Compressor-ctr'
-        }).otherwise('/');//默认路由
-    });
 })();

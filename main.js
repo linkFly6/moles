@@ -3,6 +3,7 @@ var BrowserWindow = require('browser-window');  // 创建原生浏览器窗口�
 const ipcMain = require('electron').ipcMain;//进程通讯模块
 const compressor = require('yuicompressor');//yui压缩引擎
 const _ = require('lodash');
+const shell = require('shell');
 
 // 保持一个对于 window 对象的全局引用，不然，当 JavaScript 被 GC，
 // window 会被自动地关闭
@@ -23,9 +24,11 @@ app.on('ready', function () {
     // 创建浏览器窗口。
     mainWindow = new BrowserWindow({
         //frame: false/*创建一个 Frameless Window，自己重写title最大化最小化关闭按钮*/
-        width: 1000, height: 700,
-        minWidth: 960,
+        width: 1100, height: 700,
+        minWidth: 1100,
         minHeight: 700,
+        maximizable: true,
+        //resizable: false,
         //autoHideMenuBar: true,
         webPreferences: {
 
@@ -33,11 +36,14 @@ app.on('ready', function () {
     });
 
     // 加载应用的 index.html
-    mainWindow.loadURL('file://' + __dirname + '/view/index.html');
+    mainWindow.loadURL('file://' + __dirname + '/view/home.html');
     mainWindow.isMenuBarVisible(false);
     mainWindow.setMenu(null);//置空菜单栏
     // 打开开发工具
     mainWindow.openDevTools();
+
+    //打开用户默认浏览器浏览指定的网页
+    //shell.openExternal('https://tasaid.com');
 
     // 当 window 被关闭，这个事件会被发出
     mainWindow.on('closed', function () {

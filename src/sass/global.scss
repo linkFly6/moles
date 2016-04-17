@@ -1,0 +1,19 @@
+﻿html {
+    width: 100%;
+    overflow: hidden;
+}
+
+html, body {
+    font: 14px/24px "'Microsoft Yahei',Helvetica Neue",Helvetica,Arial,'Microsoft Yahei',sans-serif;
+}
+
+//小屏幕
+$screen-sm-width: 768px;
+//中屏幕
+$screen-md-width: 940px;
+//大屏幕
+$screen-lg-width: 1200px;
+
+.center {
+    text-align: center;
+}
