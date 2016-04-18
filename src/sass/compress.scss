@@ -1,13 +1,13 @@
-﻿.nav-box {
-    border-radius: 0;
-}
-
-#content-block {
+﻿#content-block {
     padding: 10px 25px;
+
+    .compress-code {
+        resize: none;
+    }
+
+    .toolbar {
+        [type=checkbox] {
+            margin-top: 5px;
+        }
+    }
 }
-
-.compress-code {
-    resize: none;
-}
-
-

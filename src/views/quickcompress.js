@@ -17,7 +17,9 @@
             }
         }
         //压缩完成
-        ipcRenderer.on('async-compressor-reply', function (event, value) {
+        ipcRenderer.on('async-compressor-reply', function (event, err, value, extra) {//错误，压缩后的代码，警告
+            console.info(err);
+            console.log(extra);
             if (value != null) {
                 $scope.$apply(function () {
                     $scope.newCodeSource = value;

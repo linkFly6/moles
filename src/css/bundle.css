@@ -1,12 +1,23 @@
+#content-block {
+  padding: 10px 25px; }
+  #content-block .compress-code {
+    resize: none; }
+  #content-block .toolbar [type=checkbox] {
+    margin-top: 5px; }
+
+html {
+  width: 100%;
+  overflow: hidden; }
+
+html, body {
+  font: 14px/24px "'Microsoft Yahei',Helvetica Neue",Helvetica,Arial,'Microsoft Yahei',sans-serif; }
+
+.center {
+  text-align: center; }
+
 .nav-box {
   border-radius: 0; }
 
-#content-block {
-  padding: 10px 25px; }
-
-.compress-code {
-  resize: none; }
-
 html {
   width: 100%;
   overflow: hidden; }
@@ -17,15 +28,8 @@ html, body {
 .center {
   text-align: center; }
 
-html {
-  width: 100%;
-  overflow: hidden; }
-
-html, body {
-  font: 14px/24px "'Microsoft Yahei',Helvetica Neue",Helvetica,Arial,'Microsoft Yahei',sans-serif; }
-
-.center {
-  text-align: center; }
+.nav-box {
+  border-radius: 0; }
 
 .box-index .banner-box, .box-index .banner-box .banner {
   -webkit-overflow-scrolling: touch;

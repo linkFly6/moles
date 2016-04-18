@@ -14,7 +14,7 @@
                 //'line-break': 80,//在指定的列后插入一个 line-bread 符号
                 //'disable-optimizations': true//禁止优化
             }, function (err, data, extra) {//错误，压缩后的代码，警告
-                event.sender.send('async-compressor-reply', data);
+                event.sender.send('async-compressor-reply', err, data, extra);
             });
         } else
             event.sender.send('async-compressor-reply', null);
