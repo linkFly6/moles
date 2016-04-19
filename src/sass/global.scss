@@ -1,11 +1,36 @@
 ﻿html {
     width: 100%;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 html, body {
     font: 14px/24px "'Microsoft Yahei',Helvetica Neue",Helvetica,Arial,'Microsoft Yahei',sans-serif;
 }
+//自定义chrome滚动条
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track-piece {
+    /*background-color: #cfcfcf;*/
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    height: 5px;
+    background-color: #AAA;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+    width: 5px;
+    background-color: #CCCCCC;
+    border-radius: 6px;
+}
+
+/*#content {
+    padding-top: 50px;
+}*/
 
 //小屏幕
 $screen-sm-width: 768px;

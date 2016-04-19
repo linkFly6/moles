@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="main-box">
-        <h4 class="center">快速通道</h4>
+        <h4 class="center mudule-title">快速通道</h4>
         <div class="row quick-box">
             <div class="col-md-3">
                 <a href="javascript:;" class="quick-btn bg">
@@ -46,5 +46,72 @@
                 </a>
             </div>
         </div>
+        <h4 class="center mudule-title">程序员老黄历</h4>
+        <div class="row almanac">
+            <div class="col-md-8">
+                <table class="almanac-t">
+                    <colgroup>
+                        <col width="50%" />
+                        <col width="50%" />
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="good">宜</th>
+                            <th class="bad">不宜</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td valign="top" class="good">
+                                <ul>
+                                    <li ng-repeat="item in almanac.goodEvents">
+                                        <div class="a-name">{{item.name}}</div>
+                                        <div class="a-des">{{item.des}}</div>
+                                    </li>
+                                </ul>
+                            </td>
+                            <td valign="top" class="bad">
+                                <ul>
+                                    <li ng-repeat="item in almanac.badEvents">
+                                        <div class="a-name">{{item.name}}</div>
+                                        <div class="a-des">{{item.des}}</div>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4">
+                <ul class="almanac-today">
+                    <li>{{almanac.date|  date : '今天是yyyy年MM月dd日'}}</li>
+                    <li>{{'星期'+almanac.week}}</li>
+                </ul>
+                <table class="almanac-i">
+                    <tbody>
+                        <tr>
+                            <th>座位朝向：</th>
+                            <td>面向<span class="text-warning txt-dire">{{almanac.direction}}</span>写程序，BUG 最少。 </td>
+                        </tr>
+                        <tr>
+                            <th>今日宜饮：</th>
+                            <td>{{almanac.drink}}</td>
+                        </tr>
+                        <tr>
+                            <th>女神亲近指数：</th>
+                            <td>
+                                <i ng-repeat="item in almanac.stars track by $index" class="fa" ng-class="{'fa-star':item,'fa-star-o':!item}"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <ul class="almanac-des">
+                    <li>本老黄历仅面向程序员</li>
+                    <li>本老黄历内容是程序生成的，因为只有这样程序员才会信</li>
+                    <li>原作者Twitter @fake_faith</li>
+                </ul>
+            </div>
+        </div>
     </div>
+
 </div>

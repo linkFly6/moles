@@ -19,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "lodash": "^4.10.0",
+    "uglify-js": "^2.6.2",
     "yuicompressor": "^2.4.8"
   },
   "devDependencies": {

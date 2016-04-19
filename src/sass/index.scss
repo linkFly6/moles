@@ -111,11 +111,21 @@
 
     .main-box {
         padding: 10px;
-        margin: 50px auto;
+        margin: 30px auto;
         width: 80%;
 
+        & ul, & li {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .mudule-title {
+            padding: 10px 0;
+        }
+        //快速入口
         .quick-box {
-            padding-top: 15px;
+            padding: 15px 0;
 
             .quick-btn {
                 display: block;
@@ -172,6 +182,87 @@
                 background: url('../resource/grey-prism-63478a91.svg');
                 color: #666;
                 /*background-size: 150% 100%;*/
+            }
+        }
+        //老黄历
+        .almanac {
+            .almanac-t {
+                width: 100%;
+
+                th.good, th.bad {
+                    text-align: center;
+                    font-size: 32px;
+                    font-weight: 200;
+                    line-height: 2;
+                    letter-spacing: 1px;
+                }
+
+                td.good, td.bad {
+                    padding: 10px 25px;
+                }
+
+                th.good {
+                    background-color: #ffee44;
+                    border-right: 1px solid #fff;
+                }
+
+                th.bad {
+                    background-color: #ff4444;
+                    color: #fafafa;
+                }
+
+                td.good {
+                    background-color: #ffffaa;
+                    border-right: 1px solid #fff;
+                }
+
+                td.bad {
+                    background-color: #ffddd3;
+                }
+
+                .a-name {
+                    font-size: 22px;
+                    padding: 10px 0;
+                    font-weight: 600;
+                }
+
+                .a-des {
+                    color: #444;
+                }
+            }
+
+            .almanac-i {
+                .txt-dire {
+                    /*font-weight: bold;*/
+                    padding: 0 2px;
+                }
+
+                width: 100%;
+
+                th {
+                    width: 100px;
+                    text-align: right;
+                }
+
+                td, th {
+                    vertical-align: top;
+                }
+            }
+
+            .almanac-today {
+                text-align: center;
+                font-size: 18px;
+                padding: 5px 0 25px;
+                color: #666;
+            }
+
+            .almanac-des {
+                padding: 50px 0 0 20px;
+                color: #888;
+
+                li {
+                    list-style: disc;
+                }
             }
         }
     }
