@@ -2,7 +2,7 @@
   padding: 10px 25px; }
   #content-block .compress-code {
     resize: none; }
-  #content-block .toolbar [type=checkbox] {
+  #content-block .toolbar [type=checkbox], #content-block .tool-options [type=checkbox] {
     margin-top: 5px; }
 
 html {
@@ -11,6 +11,9 @@ html {
 
 html, body {
   font: 14px/24px "'Microsoft Yahei',Helvetica Neue",Helvetica,Arial,'Microsoft Yahei',sans-serif; }
+
+a, button {
+  outline: none !important; }
 
 ::-webkit-scrollbar {
   width: 6px; }
@@ -44,6 +47,9 @@ html {
 
 html, body {
   font: 14px/24px "'Microsoft Yahei',Helvetica Neue",Helvetica,Arial,'Microsoft Yahei',sans-serif; }
+
+a, button {
+  outline: none !important; }
 
 ::-webkit-scrollbar {
   width: 6px; }

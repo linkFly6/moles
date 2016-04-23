@@ -264,13 +264,39 @@ var app = angular.module('app', ['ngRoute']),
 })();
 (function () {
     'use strict';
-    //当前压缩代码信息
+    const _ = require('lodash');
+    //本地存储
+    const storage = require('electron-json-storage');
+    //本地存储key（文件名称）
+    const STORAGENAME = 'VIEWS_SIM_COMPRESSOR_OPTIONS';
+    var globalOptions = {
+        JS: {
+            join_vars: true,////合并多个变量声明，加入连续的var语句
+            hoist_funs: true,//函数声明置顶
+            hoist_vars: true,//变量声明置顶
+            drop_debugger: true,//删除调试器和调试语句（debugger）
+            dead_code: true,//删除运行不到的代码
+            unused: true,//删除没用的声明
+            loops: true,//优化循环
+            if_return: true,//优化if-else表达式
+            conditionals: true,//优化条件表达式（转换成二元）
+            evaluate: true,//优化常量表达式（尝试去计算常量表达式）
+            nomunge: true,//优化逻辑操作符
+            booleans: true,//优化布尔表达式
+            properties: false//智能对象转换=>类似a['foo'] 智能优化为 a.foo
+        },
+        CSS: {
+        }
+    };
+    storage.get(STORAGENAME, function (error, data) {
+        if (error) throw error;
+        if (data && data.js) {
+            globalOptions.JS = data.js;
+        }
+    });
     app.controller('simple-Compressor-ctr', ['$scope', '$timeout', function ($scope, $timeout) {
         $scope.oldCodeSource = $scope.newCodeSource = $scope.info = '';
         $scope.compressType = 0;
-        $scope.nomunge = false;///只压缩，不混淆
-        $scope.ps = false;//保留所有的分号
-        $scope.disableOptimizations = false;//禁止优化
         //是否正在压缩中
         $scope.compressoring = false;
         $scope.selectType = (compressType) => {
@@ -281,7 +307,23 @@ var app = angular.module('app', ['ngRoute']),
             $scope.compressType = compressType;
         };
 
-        $scope.compressor = function () {
+        //js压缩模型
+        $scope.jsConfig = {
+            jsComprssConfig: false,
+            toggleConfig: function () {
+                $scope.jsConfig.jsComprssConfig = !$scope.jsConfig.jsComprssConfig;
+            },
+            options: globalOptions.JS
+        };
+
+        $scope.$watch('jsConfig.options', _.debounce(function (newOptions, oldOptions) {//函数节流，2s之后才会执行
+            globalOptions.JS = newOptions;
+            storage.set(STORAGENAME, globalOptions, function (error, data) {
+                if (error) throw error;
+            })
+        }, 2000), true/*对象属性变动都会触发*/);
+
+        $scope.compressor = () => {
             var oldValue = $scope.oldCodeSource.trim();
             if (oldValue.length) {
                 $scope.compressoring = true;

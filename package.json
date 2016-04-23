@@ -18,14 +18,18 @@
   "author": "linkFly",
   "license": "MIT",
   "dependencies": {
+    "electron-json-storage": "^2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.2.0",
     "lodash": "^4.10.0",
     "uglify-js": "^2.6.2",
     "yuicompressor": "^2.4.8"
   },
   "devDependencies": {
     "electron-prebuilt": "^0.37.5",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.0",
-    "gulp-sass": "^2.2.0"
+    "node-gyp": "^3.3.1",
+    "node-inspector": "^0.12.8",
+    "node-pre-gyp": "git+https://git@github.com/enlight/node-pre-gyp.git#detect-electron-runtime-in-find"
   }
 }

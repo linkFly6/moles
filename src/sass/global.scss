@@ -6,6 +6,12 @@
 html, body {
     font: 14px/24px "'Microsoft Yahei',Helvetica Neue",Helvetica,Arial,'Microsoft Yahei',sans-serif;
 }
+
+a, button {
+    //bootstrap有针对btn.active做了黄色的边框处理
+    outline: none !important;
+}
+
 //自定义chrome滚动条
 ::-webkit-scrollbar {
     width: 6px;
