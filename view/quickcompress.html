@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-md-2">
                         <label class="checkbox-inline" title="优化逻辑操作符">
-                            <input type="checkbox" ng-model="jsConfig.options.nomunge"> 优化逻辑操作符
+                            <input type="checkbox" ng-model="jsConfig.options.comparisons"> 优化逻辑操作符
                         </label>
                     </div>
                     <div class="col-md-2">
@@ -95,8 +95,9 @@
                 <div class="col-md-8">
                     <div style="padding-top:9px;">
                         <span class="text-muted">压缩信息 - </span>
-                        <span class="text-info">{{info||''}}</span>
+                        <span class="text-info text-error">{{info||''}}</span>
                     </div>
+                    <button type="button" class="btn btn-danger" ng-show="isErrorResult" ng-click="isOpenError=!isOpenError">&nbsp;&nbsp;&nbsp;压&nbsp;&nbsp;&nbsp;缩&nbsp;&nbsp;&nbsp;</button>
                 </div>
                 <div class="col-md-4 text-right">
                     <div class="form-group">
@@ -104,6 +105,17 @@
                         <button type="button" class="btn btn-default" ng-click="compressor()" ng-disabled="compressoring" ng-show="compressoring"><i class="fa fa-refresh fa-spin fa-1x fa-fw margin-bottom"></i> 压缩中</button>
                     </div>
                 </div>
+            </div>
+            <!--<div class="container-fluid">
+                <div class="row">
+                    <blockquote>
+                        <p></p>
+                    </blockquote>
+                </div>
+            </div>-->
+
+            <div class="row">
+                <pre>{{error}}</pre>
             </div>
         </div>
         <div class="form-group">

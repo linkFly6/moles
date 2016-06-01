@@ -281,7 +281,7 @@ var app = angular.module('app', ['ngRoute']),
             if_return: true,//优化if-else表达式
             conditionals: true,//优化条件表达式（转换成二元）
             evaluate: true,//优化常量表达式（尝试去计算常量表达式）
-            nomunge: true,//优化逻辑操作符
+            comparisons: true,//优化逻辑操作符
             booleans: true,//优化布尔表达式
             properties: false//智能对象转换=>类似a['foo'] 智能优化为 a.foo
         },
@@ -299,6 +299,15 @@ var app = angular.module('app', ['ngRoute']),
         $scope.compressType = 0;
         //是否正在压缩中
         $scope.compressoring = false;
+
+        //这次压缩是否有异常
+        $scope.isErrorResult = false;
+        //错误框是否显示
+        $scope.isOpenError = false;
+        //错误文本
+        $scope.errorText = '';
+
+        //选择压缩类型
         $scope.selectType = (compressType) => {
             //切换了选项，则清空
             if ($scope.compressType != compressType) {
@@ -316,6 +325,7 @@ var app = angular.module('app', ['ngRoute']),
             options: globalOptions.JS
         };
 
+        //监听js压缩选项变动，有变动则存入本地
         $scope.$watch('jsConfig.options', _.debounce(function (newOptions, oldOptions) {//函数节流，2s之后才会执行
             globalOptions.JS = newOptions;
             storage.set(STORAGENAME, globalOptions, function (error, data) {
@@ -323,26 +333,50 @@ var app = angular.module('app', ['ngRoute']),
             })
         }, 2000), true/*对象属性变动都会触发*/);
 
+
+
+        //压缩
         $scope.compressor = () => {
             var oldValue = $scope.oldCodeSource.trim();
             if (oldValue.length) {
                 $scope.compressoring = true;
-                ipcRenderer.send('async-compressor', {
-                    source: oldValue,
-                    nomunge: $scope.nomunge,
-                    ps: $scope.ps,
-                    disableOptimizations: $scope.disableOptimizations,
-                    compressType: $scope.compressType == 0 ? 'js' : 'css'
-                });
+                switch ($scope.compressType) {
+                    case 0://压缩js
+                        ipcRenderer.send('async-compressor-js', {
+                            source: oldValue,
+                            options: $scope.jsConfig.options
+                        });
+                        break;
+
+                    case 1://压缩css
+
+                        break;
+
+                    default://压缩HTML
+
+                        break;
+                }
             }
         }
         //压缩完成
-        ipcRenderer.on('async-compressor-reply', function (event, err, value, extra, oldBytes, newBytes, timer) {//事件源，错误，压缩后的代码，警告，压缩前bytes，压缩后bytes，压缩耗时（ms）
-            if (value != null) {
+        ipcRenderer.on('async-compressor-js-reply', function (event, err, data, extra, oldBytes, newBytes, timer) {//事件源，错误，压缩后的代码，警告，压缩前bytes，压缩后bytes，压缩耗时（ms）
+            if (err != null) {
+                console.log(err);
+                $scope.$apply(() => {
+                    $scope.compressoring = false;
+                    $scope.info = `压缩异常`;
+                });
+                return;
+            }
+            if (data != null) {
                 $scope.$apply(function () {
-                    $scope.newCodeSource = value;
+                    $scope.newCodeSource = data.code;
                     $scope.compressoring = false;
                     $scope.info = `当前体积：${newBytes}byte | 原始体积：${oldBytes}byte | 比率：${(newBytes / oldBytes * 100).toFixed(2)}% | 执行时间：${timer} (ms)`;
+                });
+            } else {
+                $scope.$apply(() => {
+                    $scope.compressoring = false;
                 });
             }
 

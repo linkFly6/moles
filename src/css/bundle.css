@@ -206,7 +206,8 @@ a, button {
       color: #666;
       /*background-size: 150% 100%;*/ }
   .box-index .main-box .almanac .almanac-t {
-    width: 100%; }
+    width: 100%;
+    min-height: 314px; }
     .box-index .main-box .almanac .almanac-t th.good, .box-index .main-box .almanac .almanac-t th.bad {
       text-align: center;
       font-size: 32px;
