@@ -364,7 +364,8 @@ var app = angular.module('app', ['ngRoute']),
                 console.log(err);
                 $scope.$apply(() => {
                     $scope.compressoring = false;
-                    $scope.info = `压缩异常`;
+                    $scope.info = `压缩异常 - 错误行：${err.line}，错误列：${err.col} `;
+                    $scope.errorText = `错误信息：\n${err.message}`;//\n错误明细：\n${err.stack}
                 });
                 return;
             }

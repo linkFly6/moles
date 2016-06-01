@@ -96,8 +96,8 @@
                     <div style="padding-top:9px;">
                         <span class="text-muted">压缩信息 - </span>
                         <span class="text-info text-error">{{info||''}}</span>
+                        <button type="button" class="btn btn-danger" ng-show="!isErrorResult" ng-click="isOpenError=!isOpenError">&nbsp;&nbsp;&nbsp;错&nbsp;&nbsp;&nbsp;误&nbsp;&nbsp;&nbsp;</button>
                     </div>
-                    <button type="button" class="btn btn-danger" ng-show="isErrorResult" ng-click="isOpenError=!isOpenError">&nbsp;&nbsp;&nbsp;压&nbsp;&nbsp;&nbsp;缩&nbsp;&nbsp;&nbsp;</button>
                 </div>
                 <div class="col-md-4 text-right">
                     <div class="form-group">
@@ -113,9 +113,10 @@
                     </blockquote>
                 </div>
             </div>-->
-
-            <div class="row">
-                <pre>{{error}}</pre>
+            <div class="container-fluid">
+                <div class="row">
+                    <pre>{{errorText}}</pre>
+                </div>
             </div>
         </div>
         <div class="form-group">
