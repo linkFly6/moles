@@ -4,6 +4,8 @@
     resize: none; }
   #content-block .toolbar [type=checkbox], #content-block .tool-options [type=checkbox] {
     margin-top: 5px; }
+  #content-block .toolbar .checkbox-inline, #content-block .tool-options .checkbox-inline {
+    cursor: help; }
 
 html {
   width: 100%;

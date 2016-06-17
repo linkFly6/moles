@@ -8,6 +8,7 @@ gulp.task('js-compressor', function () {
         'src/views/main.js',
         'src/views/index.js',
         'src/views/quickcompress.js',
+        'src/views/quickcompile.js',
         'src/views/app.config.js'])
     .pipe(concat('bundle.js'))
     .pipe(gulp.dest('src/views/'));

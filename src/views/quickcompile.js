@@ -25,7 +25,7 @@
         }
     };
 
-    app.controller('simple-Compressor-ctr', ['$scope', '$timeout', function ($scope, $timeout) {
+    app.controller('simple-Compile-ctr', ['$scope', '$timeout', function ($scope, $timeout) {
         $scope.oldCodeSource = $scope.newCodeSource = $scope.info = '';
         $scope.compressType = 0;
         //是否正在压缩中

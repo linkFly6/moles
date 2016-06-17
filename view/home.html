@@ -11,7 +11,7 @@
     <script src="../src/reference/angular.js"></script>
     <script src="../src/reference/angular-route.min.js"></script>
 </head>
-<body>
+<body ng-controller="main">
     <nav class="navbar navbar-default nav-box">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -27,26 +27,26 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#/">首页</a></li>
+                    <li ng-class="{active:routerName=='index.html'}"><a href="#/">首页</a></li>
                     <li class="dropdown">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-retweet"></i>&nbsp;编译<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="javascript:;">快速编译ES6(2015)</a></li>
+                            <li><a href="#/simCompile">快速编译ES6(2015)</a></li>
                             <li><a href="javascript:;">配置编译ES6(2015)</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="javascript:;">快速编译Sass</a></li>
                             <li><a href="javascript:;">配置编译Sass</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exchange">&nbsp;</i>压缩<span class="caret"></span></a>
+                    <li class="dropdown"  ng-class="{active:routerName=='quickcompress.html'}">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-exchange">&nbsp;</i>压缩<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="#/simCom">快速压缩(js/css)</a></li>
                             <li><a href="javascript:;">配置压缩(js/css)</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-random">&nbsp;</i>任务<span class="caret"></span></a>
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-random">&nbsp;</i>任务<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="javascript:;">任务概况</a></li>
                             <li><a href="javascript:;">任务列表</a></li>

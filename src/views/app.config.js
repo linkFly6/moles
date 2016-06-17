@@ -7,6 +7,10 @@
         }).when('/simCom', {
             templateUrl: 'quickcompress.html',
             controller: 'simple-Compressor-ctr'
-        }).otherwise('/');//默认路由
+        }).when('/simCompile', {
+            templateUrl: 'quickcompile.html',
+            controller: 'simple-Compile-ctr'
+        })
+            .otherwise('/');//默认路由
     });
 })();
