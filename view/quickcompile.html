@@ -1,22 +1,12 @@
 ﻿<section id="content-block">
     <div class="row">
         <div class="form-group toolbar">
-            <span class="text-muted">压缩类型 - </span>
-            <div class="btn-group">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{compressType == 0 ?'JavaScript':'CSS'}} <span class="caret revert"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a href="javascript:;" ng-click="selectType(0)">JavaScript</a></li>
-                    <li><a href="javascript:;" ng-click="selectType(1)">CSS</a></li>
-                    <li><a href="javascript:;" ng-click="selectType(2)">HTML</a></li>
-                </ul>
-            </div>
-            <button type="button" class="btn btn-info " ng-class="{'active':jsConfig.jsComprssConfig}" ng-click="jsConfig.toggleConfig()">压缩选项 <span class="caret"></span></button>
+            <span class="text-muted">编译 - </span>
+            <button type="button" class="btn btn-info " ng-class="{'active':jsConfig.jsComprssConfig}" ng-click="jsConfig.toggleConfig()">编译选项 <span class="caret"></span></button>
         </div>
         <div class="panel panel-default tool-options" ng-show="jsConfig.jsComprssConfig">
-            <div class="panel-heading">UglifyJS - 压缩选项</div>
-            <!--压缩选项文档：http://www.xv90.com/post-113.html  ，  http://blog.fens.me/nodejs-uglifyjs2-js/-->
+            <div class="panel-heading">Babel - 编译选项</div>
+            <!--压缩选项文档：https://babeljs.io/docs/plugins/-->
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-2">
@@ -94,14 +84,14 @@
             <div class="row">
                 <div class="col-md-8">
                     <div style="padding-top:9px;">
-                        <span class="text-muted">压缩信息 - </span>
+                        <span class="text-muted">编译信息 - </span>
                         <span class="text-info text-error">{{info||''}}</span>
                     </div>
                 </div>
                 <div class="col-md-4 text-right">
                     <div class="form-group">
-                        <button type="button" class="btn btn-default" ng-show="!compressoring" ng-click="compressor()">&nbsp;&nbsp;&nbsp;压&nbsp;&nbsp;&nbsp;缩&nbsp;&nbsp;&nbsp;</button>
-                        <button type="button" class="btn btn-default" ng-click="compressor()" ng-disabled="compressoring" ng-show="compressoring"><i class="fa fa-refresh fa-spin fa-1x fa-fw margin-bottom"></i> 压缩中</button>
+                        <button type="button" class="btn btn-default" ng-show="!compressoring" ng-click="compressor()">&nbsp;&nbsp;&nbsp;编&nbsp;&nbsp;&nbsp;译&nbsp;&nbsp;&nbsp;</button>
+                        <button type="button" class="btn btn-default" ng-click="compressor()" ng-disabled="compressoring" ng-show="compressoring"><i class="fa fa-refresh fa-spin fa-1x fa-fw margin-bottom"></i> 编译中</button>
                     </div>
                 </div>
             </div>

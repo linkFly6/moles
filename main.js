@@ -53,6 +53,6 @@ app.on('ready', function () {
     });
 
     require('./src/services/quickcompress');
-
+    require('./src/services/quickcompile');
 
 });
