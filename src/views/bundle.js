@@ -411,59 +411,63 @@ app.controller('main', ['$scope', ($scope) => {
     //本地存储key（文件名称）
     const STORAGENAME = 'VIEWS_SIM_COMPILE_OPTIONS';
     var globalOptions = {
-        JS: {
-            join_vars: true,////合并多个变量声明，加入连续的var语句
-            hoist_funs: true,//函数声明置顶，多个变量合并不利于压缩代码调试
-            hoist_vars: true,//变量声明置顶，多个变量合并不利于压缩代码调试
-            drop_debugger: true,//删除调试器和调试语句（debugger）
-            dead_code: true,//删除运行不到的代码
-            unused: true,//删除没用的声明
-            loops: true,//优化循环
-            if_return: true,//优化if-else表达式
-            conditionals: true,//优化条件表达式（转换成二元）
-            evaluate: true,//优化常量表达式（尝试去计算常量表达式）
-            comparisons: true,//优化逻辑操作符
-            booleans: true,//优化布尔表达式
-            properties: false//智能对象转换=>类似a['foo'] 智能优化为 a.foo
-        },
-        CSS: {
-        }
+        templateLiterals: true,//字符串模板
+        arrowFunctions: true,//箭头函数
+        blockScopedFunctions: true,//函数块级作用域
+        classes: false,//支持Class
+        shorthandProperties: false,//对象快捷属性
+        shorthandKeys: false,//重复属性转换
+        computedProperties: false,//对象中括号属性
+        forOf: true,//编译for...of语法
+        stickyRegex: false,//正则标记(y)
+        unicodeRegex: false,//正则标记(u)
+        constants: true,//const常量
+        spread: true,//扩展运算符(...values)
+        parameters: false,//参数默认值
+        destructuring: false,//赋值解构
+        blockScoping: true,//let和const块级作用域
+        typeofSymbol: false,//编译typeof Symbol()
+        modulesCommonjs: false,//commonJS
+        modulesAmd: false,//AMD
+        modulesUmd: true,//UMD
+        eval: true,//包装eval
+        asyncMethod: false,//async转换
+        regenerator: false//Generator
     };
 
-    app.controller('simple-Compile-ctr', ['$scope', '$timeout', function ($scope, $timeout) {
+    app.controller('simple-Compile-ctr', ['$scope', '$timeout', ($scope, $timeout) => {
         $scope.oldCodeSource = $scope.newCodeSource = $scope.info = '';
-        //是否正在压缩中
+        //是否正在编译中
         $scope.compressoring = false;
 
         //这次压缩是否有异常
         $scope.isErrorResult = false;
         //错误文本
         $scope.errorText = '';
-
         //js压缩模型
-        $scope.jsConfig = {
-            jsComprssConfig: false,
+        $scope.options = {
+            compile: false,
             toggleConfig: function () {
-                $scope.jsConfig.jsComprssConfig = !$scope.jsConfig.jsComprssConfig;
+                $scope.options.compile = !$scope.options.compile;
             },
-            options: globalOptions.JS
+            config: globalOptions
         };
-        ////从本地存储读取配置
-        //storage.get(STORAGENAME, function (error, data) {
-        //    if (error) return;//throw error //有错误则不读取了
-        //    if (data && data.JS) {
-        //        globalOptions.JS = data.JS;
-        //        $scope.jsConfig.options = data.JS;
-        //    }
-        //});
+        //从本地存储读取配置
+        storage.get(STORAGENAME, (error, data) => {
+            if (error) return;//throw error //有错误则不读取了
+            if (data) {
+                globalOptions = data;
+                $scope.options.config = data;
+            }
+        });
 
         //监听js压缩选项变动，有变动则存入本地
-        $scope.$watch('jsConfig.options', _.debounce(function (newOptions, oldOptions) {//函数节流，2s之后才会执行
-            globalOptions.JS = newOptions;
-            //storage.set(STORAGENAME, globalOptions, function (error, data) {
-            //    //if (error) throw error;
-            //    if (error) return;//有错误也不抛出
-            //});
+        $scope.$watch('options.config', _.debounce(function (newOptions, oldOptions) {//函数节流，2s之后才会执行
+            globalOptions = newOptions;
+            storage.set(STORAGENAME, globalOptions, function (error, data) {
+                //if (error) throw error;
+                if (error) return;//有错误也不抛出
+            });
         }, 2000), true/*对象属性变动都会触发*/);
 
         $scope.$watch('oldCodeSource', _.debounce(() => {
@@ -484,13 +488,13 @@ app.controller('main', ['$scope', ($scope) => {
                 $scope.compressoring = true;
                 ipcRenderer.send('async-compile-es', {
                     source: oldValue,
-                    options: $scope.jsConfig.options
+                    options: $scope.options.config
                 });
             }
         }
         //编译完成
         ipcRenderer.on('async-compile-es-reply', function (event, err, data, oldBytes, newBytes, timer) {//事件源，错误，编译后的代码，编译前bytes，编译后bytes，编译耗时（ms）
-            console.log(err);
+            console.log(err, data);
             if (err != null) {
                 $scope.$apply(() => {
                     $scope.compressoring = false;

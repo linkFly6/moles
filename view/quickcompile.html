@@ -2,83 +2,128 @@
     <div class="row">
         <div class="form-group toolbar">
             <span class="text-muted">编译 - </span>
-            <button type="button" class="btn btn-info " ng-class="{'active':jsConfig.jsComprssConfig}" ng-click="jsConfig.toggleConfig()">编译选项 <span class="caret"></span></button>
+            <button type="button" class="btn btn-info " ng-class="{'active':options.compile}" ng-click="options.toggleConfig()">编译选项 <span class="caret"></span></button>
         </div>
-        <div class="panel panel-default tool-options" ng-show="jsConfig.jsComprssConfig">
+        <div class="panel panel-default tool-options" ng-show="options.compile">
             <div class="panel-heading">Babel - 编译选项</div>
             <!--压缩选项文档：https://babeljs.io/docs/plugins/-->
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="合并多个变量声明，加入连续的var语句&#10;关闭后易于压缩代码调试，但会降低压缩率">
-                            <input type="checkbox" ng-model="jsConfig.options.join_vars"> 合并多个变量声明
+                        <label class="checkbox-inline" title="编译字符串模板">
+                            <input type="checkbox" ng-model="options.config.templateLiterals"> 字符串模板
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="函数声明置顶&#10;关闭后易于压缩代码调试，但会降低压缩频率">
-                            <input type="checkbox" ng-model="jsConfig.options.hoist_funs"> 函数声明置顶
+                        <label class="checkbox-inline" title="编译箭头函数">
+                            <input type="checkbox" ng-model="options.config.arrowFunctions"> 箭头函数
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="变量声明置顶&#10;关闭后易于压缩代码调试，但会降低压缩频率">
-                            <input type="checkbox" ng-model="jsConfig.options.hoist_vars"> 变量声明置顶
+                        <label class="checkbox-inline" title="函数块级作用域">
+                            <input type="checkbox" ng-model="options.config.blockScopedFunctions"> 函数块级作用域
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="删除调试器和调试语句（debugger）&#10;例如console.log">
-                            <input type="checkbox" ng-model="jsConfig.options.drop_debugger"> 删除调试语句
+                        <label class="checkbox-inline" title="编译Class">
+                            <input type="checkbox" ng-model="options.config.classes"> 支持Class
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="删除运行不到的代码">
-                            <input type="checkbox" ng-model="jsConfig.options.dead_code"> 删除运行不到的代码
+                        <label class="checkbox-inline" title="对象快捷属性&#10;如obj = { x, y }">
+                            <input type="checkbox" ng-model="options.config.shorthandProperties"> 对象快捷属性
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="删除没用的变量、函数">
-                            <input type="checkbox" ng-model="jsConfig.options.unused"> 删除没用的声明
+                        <label class="checkbox-inline" title="重复属性转换&#10;当检测到属性重复，则采用[对象中括号属性]处理">
+                            <input type="checkbox" ng-model="options.config.shorthandKeys"> 重复属性转换
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="优化循环&#10;当我们可以静态的判断条件的取值时，针对do,while和for循环的优化">
-                            <input type="checkbox" ng-model="jsConfig.options.loops"> 优化循环
+                        <label class="checkbox-inline" title="对象中括号属性&#10;var obj = { ['x'] : 1 }">
+                            <input type="checkbox" ng-model="options.config.computedProperties"> 对象中括号属性
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="优化if-else表达式">
-                            <input type="checkbox" ng-model="jsConfig.options.if_return"> 优化if-else表达式
+                        <label class="checkbox-inline" title="编译for...of语法">
+                            <input type="checkbox" ng-model="options.config.forOf"> for...of
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="优化条件表达式（转换成二元）">
-                            <input type="checkbox" ng-model="jsConfig.options.conditionals"> 优化条件表达式
+                        <label class="checkbox-inline" title="正则新的标记/y（sticky-regex） - /^foo/y">
+                            <input type="checkbox" ng-model="options.config.stickyRegex"> 正则标记(y)
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="优化常量表达式（尝试去计算常量表达式）">
-                            <input type="checkbox" ng-model="jsConfig.options.evaluate"> 优化常量表达式
+                        <label class="checkbox-inline" title="正则新的标记/u（unicode-regex） - /\u{61}/u">
+                            <input type="checkbox" ng-model="options.config.unicodeRegex"> 正则标记(u)
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="优化逻辑操作符">
-                            <input type="checkbox" ng-model="jsConfig.options.comparisons"> 优化逻辑操作符
+                        <label class="checkbox-inline" title="编译const常量">
+                            <input type="checkbox" ng-model="options.config.constants"> const常量
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="优化布尔表达式&#10;例如 - !!a ? b : c = a ? b : c">
-                            <input type="checkbox" ng-model="jsConfig.options.booleans"> 优化布尔表达式
+                        <label class="checkbox-inline" title="扩展运算符&#10;function foo(bar,...values){ }">
+                            <input type="checkbox" ng-model="options.config.spread"> ...values
                         </label>
                     </div>
                     <div class="col-md-2">
-                        <label class="checkbox-inline" title="类似a['foo'] 智能优化为 a.foo">
-                            <input type="checkbox" ng-model="jsConfig.options.properties"> 智能对象转换
+                        <label class="checkbox-inline" title="默认参数值和扩展运算符&#10;function (a, b = 1, c :: String) { }">
+                            <input type="checkbox" ng-model="options.config.parameters"> 参数默认值
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="checkbox-inline" title="赋值解构&#10;let { foo, bar } = foz();">
+                            <input type="checkbox" ng-model="options.config.destructuring"> 赋值解构
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="checkbox-inline" title="let和const使用块级作用域">
+                            <input type="checkbox" ng-model="options.config.blockScoping"> let和const作用域
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="checkbox-inline" title="编译typeof Symbol()">
+                            <input type="checkbox" ng-model="options.config.typeofSymbol"> typeof symbol
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="checkbox-inline" title="编译为commonJS模块&#10;和AMD/UMD编译选项不兼容">
+                            <input type="checkbox" ng-model="options.config.modulesCommonjs"> commonJS
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="checkbox-inline" title="编译为AMD模块&#10;和commonJS/UMC编译选项不兼容">
+                            <input type="checkbox" ng-model="options.config.modulesAmd"> AMD
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="checkbox-inline" title="编译为UMD模块&#10;和commonJS/AMD编译选项不兼容">
+                            <input type="checkbox" ng-model="options.config.modulesUmd"> UMD
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="checkbox-inline" title="为了安全性考虑，包装eval">
+                            <input type="checkbox" ng-model="options.config.eval"> 包装eval
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="checkbox-inline" title="编译async函数">
+                            <input type="checkbox" ng-model="options.config.asyncMethod"> async转换
+                        </label>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="checkbox-inline" title="编译Generator函数">
+                            <input type="checkbox" ng-model="options.config.regenerator"> Generator
                         </label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <textarea class="form-control compress-code" rows="8" ng-model="oldCodeSource"></textarea>      
+            <textarea class="form-control compress-code" rows="8" ng-model="oldCodeSource"></textarea>
         </div>
         <div class="form-group">
             <div class="row">
