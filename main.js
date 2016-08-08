@@ -1,8 +1,10 @@
-﻿var app = require('app');  // 控制应用生命周期的模块。
-var BrowserWindow = require('browser-window');  // 创建原生浏览器窗口的模块
+﻿var {
+    app,
+    BrowserWindow,
+    shell} = require('electron');  // 控制应用生命周期的模块和创建原生浏览器窗口的模块
 const ipcMain = require('electron').ipcMain;//进程通讯模块
 const _ = require('lodash');
-const shell = require('shell');
+
 
 // 保持一个对于 window 对象的全局引用，不然，当 JavaScript 被 GC，
 // window 会被自动地关闭
