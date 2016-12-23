@@ -1,33 +1,29 @@
 ﻿var gulp = require('gulp'),
     concat = require('gulp-concat'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    plumber = require('gulp-plumber'),
+    task = require('./build/build');
 
 //js合并任务
-gulp.task('js-compressor', function () {
-    gulp.src([
-        'src/views/main.js',
-        'src/views/index.js',
-        'src/views/quickcompress.js',
-        'src/views/quickcompile.js',
-        'src/views/app.config.js'])
-    .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('src/views/'));
+gulp.task('view', function(callbck) {
+    console.log('vuew: ', callback);
+    task.view(callback);
 });
 
 //sass编译合并任务
-gulp.task('sass-compressor', function () {
-    gulp.src('src/sass/*.scss')
-    .pipe(sass(/*{outputStyle: 'compressed'}*/).on('error', sass.logError))
-    .pipe(concat('bundle.css'))
-    .pipe(gulp.dest('src/css/'));
+gulp.task('controller', function(callback) {
+    console.log('controller: ', callback);
+    task.controller(callback);
 });
 
 
 //默认任务：命令 - gulp [default]
-gulp.task('default', function () {
+gulp.task('default', function() {
     //监听js
-    gulp.watch(['src/views/*.js', '!bundle.js'], ['js-compressor']);
+    gulp.watch(['src/views/*.*', 'src/sass/*.*', 'src/index.html'], ['view']);
     //监听sass
-    gulp.watch(['src/sass/*.scss'], ['sass-compressor']);
+    gulp.watch(['src/controller/*.*'], ['controller']);
 
+    task.view();
+    // task.controller();
 });
