@@ -3,8 +3,6 @@ import { ipcMain } from 'electron';//进程通讯模块
 import path from 'path';
 import url from 'url';
 
-
-
 // 保持一个对于 window 对象的全局引用，不然，当 JavaScript 被 GC，
 // window 会被自动地关闭
 var mainWindow = null;

@@ -15,7 +15,7 @@ var config = {
         publicPath: '../scripts/',
         filename: '[name].js'
     },
-    target: 'electron-renderer',
+    target: 'electron',
     resolve: {
         // 写入到该处的扩展名，在加载的时候，可以省略后缀
         extensions: [''/* webpack 2.x 不支持空字符串，要写 * 号 */, '.js', '.vue'],
@@ -42,31 +42,32 @@ var config = {
                 loader: 'babel',
                 // include: [path.resolve(__dirname, '../example')],
                 exclude: /node_modules/,
-                query: {
-                    "presets": ["es2015", "stage-2"],
-                    "plugins": ["transform-runtime"],
-                    "comments": false
-                }
+                //  export 语法没有编译，在根目录新建了一个 .babelrc 然后把这段代码放进去就好了，但是在这里写的话就没有卵用
+                // query: {
+                //     "presets": ["es2015", "stage-2"],
+                //     "plugins": ["transform-runtime"],
+                //     "comments": false
+                // }
             },
             {
                 test: /\.json$/,
                 loader: 'json'
             },
             {
-                test: /\.html$/,
-                loader: 'vue-html'
+                test: /\.(gif|jpg|png|woff|woff2|svg|eot|ttf)\??.*$/,
+                loader: "file"
+            },
+            {
+                test: /\.scss$/,
+                loader: 'style!css!sass'
             },
             {
                 test: /\.css$/,
                 loader: 'style!css'
             },
             {
-                test: /\.(png|jpg)$/,
-                loader: "url?limit=8192"
-            },
-            {
-                test: /\.svg$/,
-                loader: "file"
+                test: /\.html$/,
+                loader: 'vue-html'
             }
         ]
     },

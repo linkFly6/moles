@@ -24,7 +24,7 @@
         height: 176px;
         @media screen and (min-width: $screen-lg-width) {
           width: 45%;
-          height: 300px;
+          height: 200px;
         }
         div {
           width: 100%;
@@ -140,6 +140,7 @@
         }
         .mar {
           padding-top: 15px;
+          margin-bottom: 1.3rem;
         }
         .bg {
           background: url('../resource/compress-bg.png');
@@ -236,23 +237,23 @@
   <div class="box-index">
     <div class="banner-box">
       <div class="banner" id="b-box">
-        <div class='i-box1' ng-click="bannerClick($event)" data-index="1"><a href='javascript:;'><span>title1</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/1.jpg" /></a></div>
-        <div class='i-box2' ng-click="bannerClick($event)" data-index="2"><a href='javascript:;'><span>title2</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/2.jpg" /></a></div>
-        <div class='i-box3' ng-click="bannerClick($event)" data-index="3"><a href='javascript:;'><span>title3</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/3.jpg" /></a></div>
-        <div class='i-box4' ng-click="bannerClick($event)" data-index="4"><a href='javascript:;'><span>title4</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/4.jpg" /></a></div>
-        <div class='i-box5' ng-click="bannerClick($event)" data-index="5"><a href='javascript:;'><span>title5</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/5.jpg" /></a></div>
+        <div class='i-box1' title="1" @click="bannerClick($event)" data-index="1"><a href='javascript:;'><span>title1</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/1.jpg" /></a></div>
+        <div class='i-box2' title="2" @click="bannerClick($event)" data-index="2"><a href='javascript:;'><span>title2</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/2.jpg" /></a></div>
+        <div class='i-box3' title="3" @click="bannerClick($event)" data-index="3"><a href='javascript:;'><span>title3</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/3.jpg" /></a></div>
+        <div class='i-box4' title="4" @click="bannerClick($event)" data-index="4"><a href='javascript:;'><span>title4</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/4.jpg" /></a></div>
+        <div class='i-box5' title="5" @click="bannerClick($event)" data-index="5"><a href='javascript:;'><span>title5</span><img src="http://sandbox.runjs.cn/uploads/rs/376/tz2ofdap/5.jpg" /></a></div>
       </div>
     </div>
     <div class="main-box">
       <h4 class="center mudule-title">快速通道</h4>
-      <div class="row quick-box">
-        <div class="col-md-3">
+      <mu-flexbox class="mt8 quick-box">
+        <mu-flexbox-item class="flex-demo">
           <a href="javascript:;" class="quick-btn bg">
             <h3 class="mar">快速压缩</h3>
             <p>快速压缩JS/CSS/HTML</p>
           </a>
-        </div>
-        <div class="col-md-3">
+        </mu-flexbox-item>
+        <mu-flexbox-item class="flex-demo">
           <a href="javascript:;" class="quick-btn q-logo sass">
             <div>
               <img src="../resource/logo-sass-b6e1ef6e.svg" height="50" width="130" />
@@ -260,9 +261,8 @@
             <p>Sass编译</p>
             <p>粘贴Sass快速编译成Css</p>
           </a>
-        </div>
-
-        <div class="col-md-3">
+        </mu-flexbox-item>
+        <mu-flexbox-item class="flex-demo">
           <a href="javascript:;" class="quick-btn bg b-1">
             <div style="padding-top:11px;">
               <img src="../resource/babel.png" height="61" width="122" />
@@ -270,8 +270,8 @@
             <p>JavaScript编译</p>
             <p>粘贴JavaScript快速编译</p>
           </a>
-        </div>
-        <div class="col-md-3">
+        </mu-flexbox-item>
+        <mu-flexbox-item class="flex-demo">
           <a href="javascript:;" class="quick-btn q-logo">
             <div>
               <img src="../resource/gulp-white-text.svg" height="50" width="130" />
@@ -279,91 +279,152 @@
             <p>任务管理</p>
             <p>配置压缩、编译等任务</p>
           </a>
-        </div>
-      </div>
+        </mu-flexbox-item>
+      </mu-flexbox>
       <h4 class="center mudule-title">程序员老黄历</h4>
-      <div class="row almanac">
-        <div class="col-md-8">
-          <table class="almanac-t">
-            <colgroup>
-              <col width="50%" />
-              <col width="50%" />
-            </colgroup>
-            <thead>
-              <tr>
-                <th class="good">宜</th>
-                <th class="bad">不宜</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td valign="top" class="good">
-                  <ul>
-                    <li ng-repeat="item in almanac.goodEvents">
-                      <div class="a-name">{{item.name}}</div>
-                      <div class="a-des">{{item.des}}</div>
-                    </li>
-                  </ul>
-                </td>
-                <td valign="top" class="bad">
-                  <ul>
-                    <li ng-repeat="item in almanac.badEvents">
-                      <div class="a-name">{{item.name}}</div>
-                      <div class="a-des">{{item.des}}</div>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-md-4">
-          <ul class="almanac-today">
-            <li>{{almanac.date| date : '今天是yyyy年MM月dd日'}}</li>
-            <li>{{'星期'+almanac.week}}</li>
-          </ul>
-          <table class="almanac-i">
-            <tbody>
-              <tr>
-                <th>座位朝向：</th>
-                <td>面向<span class="text-warning txt-dire">{{almanac.direction}}</span>写程序，BUG 最少。 </td>
-              </tr>
-              <tr>
-                <th>今日宜饮：</th>
-                <td>{{almanac.drink}}</td>
-              </tr>
-              <tr>
-                <th>女神亲近指数：</th>
-                <td>
-                  <i ng-repeat="item in almanac.stars track by $index" class="fa" ng-class="{'fa-star':item,'fa-star-o':!item}"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <ul class="almanac-des">
-            <li>本老黄历仅面向程序员</li>
-            <li>本老黄历内容是程序生成的，因为只有这样程序员才会信</li>
-            <li>原作者Twitter @fake_faith</li>
-          </ul>
-        </div>
+      <div class="almanac">
+        <mu-row gutter>
+          <mu-col width="100" tablet="60" desktop="60">
+            <table class="almanac-t">
+              <colgroup>
+                <col width="50%" />
+                <col width="50%" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th class="good">宜</th>
+                  <th class="bad">不宜</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td valign="top" class="good">
+                    <ul>
+                      <li v-for="item in almanac.goodEvents">
+                        <div class="a-name">{{item.name}}</div>
+                        <div class="a-des">{{item.des}}</div>
+                      </li>
+                    </ul>
+                  </td>
+                  <td valign="top" class="bad">
+                    <ul>
+                      <li v-for="item in almanac.badEvents">
+                        <div class="a-name">{{item.name}}</div>
+                        <div class="a-des">{{item.des}}</div>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </mu-col>
+          <mu-col width="100" tablet="40" desktop="40">
+            <ul class="almanac-today">
+              <li>{{ almanac.date | date }}</li>
+              <li>{{'星期'+almanac.week}}</li>
+            </ul>
+            <table class="almanac-i">
+              <tbody>
+                <tr>
+                  <th>座位朝向：</th>
+                  <td>面向<span class="text-warning txt-dire">{{almanac.direction}}</span>写程序，BUG 最少。 </td>
+                </tr>
+                <tr>
+                  <th>今日宜饮：</th>
+                  <td>{{almanac.drink}}</td>
+                </tr>
+                <tr>
+                  <th>女神亲近指数：</th>
+                  <td>
+                    <mu-icon value="star_rate" :size="19" :color="item ? '#f87' : '#ccc'" v-for="item in almanac.stars"/>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <ul class="almanac-des">
+              <li>本老黄历仅面向程序员</li>
+              <li>本老黄历内容是程序生成的，因为只有这样程序员才会信</li>
+              <li>原作者 @fake_faith</li>
+            </ul>
+          </mu-col>
+        </mu-row>
       </div>
     </div>
   </div>
 </template>
 <script>
+import almanac from '../lib/programmerAlmanac';
+import so from '../lib/so';
+
+//当前焦点图索引
+var currIndex = 3,
+    $bannerBox = document.getElementById('b-box'),
+    $bannerChild = $bannerBox && $bannerBox.children,
+    bannerLength = $bannerChild && $bannerChild.length,
+    temp,
+    createClassName = function (index) {
+        return 'i-box' + index;
+    },
+    move2Right = function () {
+        temp = $bannerChild[bannerLength - 1];
+        //$bannerChild.removeAttr('class');
+        for (let i = bannerLength - 1; i > 0; i--) {
+            $bannerChild[i] = $bannerChild[i - 1];
+            $bannerChild[i].className = createClassName(i + 1);
+            $bannerChild[i].dataset.index = i + 1;
+        }
+        $bannerChild[0] = temp;
+        $bannerChild[0].className = createClassName(1);
+        $bannerChild[0].dataset.index = 1;
+    },
+    move2Left = function () {
+        temp = $bannerChild[0];
+        [].forEach.call($bannerChild, (item) => {
+          item.className = '';
+        });
+        for (let i = 0; i < bannerLength - 1; i++) {
+            //if ($bannerChild[i + 1]) {
+            $bannerChild[i] = $bannerChild[i + 1];
+            $bannerChild[i].className = createClassName(i + 1);
+            $bannerChild[i].dataset.index = i + 1;
+            //}
+        }
+        temp.className = createClassName(bannerLength);
+        temp.dataset.index = bannerLength;
+        $bannerChild[bannerLength - 1] = temp;
+    }
 export default {
   data () {
     return {
+      almanac
+    }
+  },
+  filters: {
+    date: function (date) {
+      return so.dateFormat(date, '今天是yyyy年MM月dd日');
     }
   },
   components: {
   },
-  ready: function () {
+  mounted: function () {
+    $bannerBox = document.getElementById('b-box');
+    $bannerChild = [].slice.call($bannerBox.children, 0); // 注意 HTMLConection 和 Array
+    bannerLength = $bannerChild.length;
 
   },
   events: {
   },
   methods: {
+    bannerClick: function (e) {
+      var clickIndex = e.currentTarget.dataset.index;
+      if (clickIndex == currIndex - 1) {
+          move2Right();
+      } else if (clickIndex == currIndex + 1) {
+          move2Left();
+      } else if (currIndex === clickIndex) {
+          alert(`您点击了 ${currIndex}`)
+      };
+    }
   }
 }
 </script>

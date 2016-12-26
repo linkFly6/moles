@@ -30,7 +30,7 @@ var configInfos = {
                 colors: true
             }));
             if (callback) {
-                console.log('cakkback controller :');
+                console.log('cakkback view :');
                 callback();
             }
         });

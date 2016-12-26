@@ -1,13 +1,11 @@
 import Home from '../views/Home';
+import Test from '../views/Test';
 
-export default function (router) {
-  router.map({
-    '/home': {
-      name: 'home',
-      component: Home
-    },
-    // '*': {
-    //   component: ErrorPage
-    // }
-  });
-}
+export default
+    [
+        {
+            path: '/',
+            name: 'home',
+            component: Home
+        }
+    ];

@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var config = {
   devtool: 'source-map',// false 关闭调试
@@ -62,20 +61,6 @@ var config = {
     // new webpack.optimize.OccurenceOrderPlugin(),
     // new webpack.HotModuleReplacementPlugin(),
     // new webpack.NoErrorsPlugin(),
-    // //修正HTML
-    // new HtmlWebpackPlugin({
-    //   filename: './index.html',// 输出的 html 资源路径
-    //   template: 'example/index.html',// 模板文件路径
-    //   inject: true,
-    //   minify: {
-    //     minifyJS: true,
-    //     removeComments: true,
-    //     collapseWhitespace: true,
-    //     removeAttributeQuotes: true
-    //     // more options:
-    //     // https://github.com/kangax/html-minifier#options-quick-reference
-    //   }
-    // })
   ],
   eslint: {
     // formatter: require('eslint-friendly-formatter')
