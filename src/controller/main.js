@@ -30,7 +30,9 @@ app.on('ready', function() {
         //autoHideMenuBar: true,
         webPreferences: {
 
-        }
+        },
+        movable: true,
+        titleBarStyle:'hidden' // hidden-inset
     });
 
     // 加载应用的 index.html
@@ -45,7 +47,7 @@ app.on('ready', function() {
     mainWindow.isMenuBarVisible(false);
     mainWindow.setMenu(null);//置空菜单栏
     // 打开开发工具
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
 
     //打开用户默认浏览器浏览指定的网页
     //shell.openExternal('https://tasaid.com');
