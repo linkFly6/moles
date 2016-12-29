@@ -1,7 +1,8 @@
 ﻿import Vue from 'vue';
 import MuseUI from 'muse-ui';
 import 'muse-ui/dist/muse-ui.css';
-import '../sass/materialIcon.scss';
+import '../fonts/materialIcon.scss';
+import '../fonts/icon-moles-font.css';
 import VueRouter from 'vue-router';
 import App from '../views/App';
 import routes from './routers';

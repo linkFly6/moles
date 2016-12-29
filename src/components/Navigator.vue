@@ -1,6 +1,7 @@
-<style lang="sass" scoped>
+<style lang="sass">
+  $navHeight: 80px;
+  $navFontColor: rgba(255, 255, 255, .7);
   .nav-box {
-    background: #f7f7f9;
     /*-webkit-user-select: none;
     -webkit-app-region: drag!important;*/
     .row {
@@ -14,29 +15,52 @@
       -webkit-app-region: no-drag;
     }
     .navbar {
-      padding-left: 59px;// mac os 的最小化/最大化按钮
+      background: rgba(29, 140, 224, 8);
+      padding-left: 2rem;
       width: 100%;
       -webkit-box-align: start;
       justify-content: flex-start;
       align-items: flex-start;
       text-align: left;
       cursor: default!important;
-      .nav-item {
-        max-width: 128px;
-        vertical-align: middle;
-        height: 56px;
+      .nav-more {
+        height: $navHeight;
+        padding-top: 30px;
       }
-      .nav-more {}
       .home-logo {
-        margin: 0 auto;
-        width: 24px;
-        height: 24px;
+        margin: $navHeight/2 auto 0;
+        width: 90px;
+        display: block;
       }
       .menus {
         background: transparent;
       }
       .nav-item {
-        max-width: 100px;
+        &.logo-item {
+          width: 75px;
+        }
+        height: $navHeight;
+        vertical-align: middle;
+        .nav-btn {
+          height: 100%;
+          width: 100%;
+          line-height: 100%;
+          padding-top: 10px;
+          /*color: rgba(0, 0, 0, .54);*/
+          color: $navFontColor;
+          .icon-moles {
+            font-size: 30px;
+            line-height: 40px;
+            display: block;
+          }
+          &.active {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: rgba(245, 222, 179, .9);
+          }
+        }
+        .mu-flat-button-wrapper {
+          display: block;
+        }
       }
     }
   }
@@ -46,8 +70,38 @@
   <div class="nav-box">
     <mu-paper class="navbar">
       <mu-row gutter>
-        <mu-col width="100" tablet="40" desktop="40" class="noDrag">
-          <mu-bottom-nav :value="bottomNav" @change="handleChange" class="menus">
+        <mu-col width="100" tablet="55" desktop="55" class="noDrag">
+          <mu-flexbox :gutter="0" justify="flex-start">
+            <mu-flexbox-item class="nav-item logo-item">
+              <img src="../resource/logo-text.png" class="home-logo" />
+            </mu-flexbox-item>
+            <mu-flexbox-item class="nav-item">
+              <mu-flat-button label="首页" class="nav-btn" :class="{ active : actionName === 'home' }" @click="toHome">
+                <i class="icon-moles im-shouye"></i>
+              </mu-flat-button>
+            </mu-flexbox-item>
+            <mu-flexbox-item class="nav-item">
+              <mu-flat-button label="任务" class="nav-btn" :class="{ active : actionName === 'task' }" @click="toTask">
+                <i class="icon-moles im-renwu2"></i>
+              </mu-flat-button>
+            </mu-flexbox-item>
+            <mu-flexbox-item class="nav-item">
+              <mu-flat-button label="编译" class="nav-btn" :class="{ active : actionName === 'build' }" @click="toBuild">
+                <i class="icon-moles im-guizezujian"></i>
+              </mu-flat-button>
+            </mu-flexbox-item>
+            <mu-flexbox-item class="nav-item">
+              <mu-flat-button label="压缩" class="nav-btn" :class="{ active : actionName === 'compress' }" @click="toCompress">
+                <i class="icon-moles im-shousuo"></i>
+              </mu-flat-button>
+            </mu-flexbox-item>
+            <mu-flexbox-item class="nav-item">
+              <mu-flat-button label="插件" class="nav-btn" :class="{ active : actionName === 'plugs' }" @click="toPlugs">
+                <i class="icon-moles im-moxingzujian"></i>
+              </mu-flat-button>
+            </mu-flexbox-item>
+          </mu-flexbox>
+          <!--<mu-bottom-nav :value="bottomNav" @change="handleChange" class="menus">
             <mu-bottom-nav-item value="home" title="首页" class="nav-item">
               <img src="../resource/logo.png" class="home-logo" />
             </mu-bottom-nav-item>
@@ -55,14 +109,14 @@
             <mu-bottom-nav-item value="build" title="编译" icon="swap_calls" class="nav-item" />
             <mu-bottom-nav-item value="compress" title="压缩" icon="text_fields" class="nav-item" />
             <mu-bottom-nav-item value="plugs" title="插件" icon="list" class="nav-item" />
-          </mu-bottom-nav>
+          </mu-bottom-nav>-->
         </mu-col>
-        <mu-col width="100" tablet="20" desktop="20">
+        <mu-col width="100" tablet="10" desktop="10">
         </mu-col>
-        <mu-col width="100" tablet="28" desktop="28">
+        <mu-col width="100" tablet="28" desktop="28" class="nav-more">
           <mu-text-field icon="search" hintText="搜索插件" class="noDrag" />
           <mu-icon-menu icon="more_vert" :anchorOrigin="{ horizontal: 'right', vertical: 'top'}" :targetOrigin="{horizontal: 'left', vertical: 'top'}"
-            class="nav-more noDrag" style="vertical-align:middle;">
+            class="noDrag" style="vertical-align:middle;">
             <mu-menu-item title="Refresh" />
             <mu-menu-item title="Send feedback" />
             <mu-menu-item title="Settings" />
@@ -78,7 +132,7 @@
 export default {
   data () {
     return {
-      bottomNav: 'home'
+      actionName: 'home'
     }
   },
   components: {
@@ -93,13 +147,23 @@ export default {
     
   },
   methods: {
-    handleChange (value, item) {
-      this.bottomNav = value;
-      
-      if (value) {
-        this.$emit('change', value);
-      }
-      this.$emit('itemClick', item);
+    toHome () {
+      this.actionName = 'home';
+      this.$router.push('/');
+    },
+    toTask () {
+      this.actionName = 'task';
+    },
+    toBuild () {
+      this.actionName = 'build';
+    },
+    toCompress () {
+      this.actionName = 'compress';
+      // this.$router.push({ name: 'compressQuick' });
+      this.$router.push('/compress/quick');
+    },
+    toPlugs () {
+      this.actionName = 'plugs';
     }
   }
 }
