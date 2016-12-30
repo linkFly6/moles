@@ -10,6 +10,7 @@
     }
     .main {
       width: 100%;
+      flex: 1;
     }
   }
 </style>
@@ -25,21 +26,21 @@
   </div>
 </template>
 <script>;
-export default {
-  data () {
-    return {};
-  },
-  components: {
-  },
-  events: {
-  },
-  mounted () {
+  export default {
+    data() {
+      return {};
+    },
+    components: {
+    },
+    events: {
+    },
+    mounted() {
 
-  },
-  updated () {
+    },
+    updated() {
 
-  },
-  methods: {
+    },
+    methods: {
+    }
   }
-}
 </script>

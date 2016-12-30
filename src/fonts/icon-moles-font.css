@@ -11,6 +11,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.im-yuandian:before { content: "\e638"; }
+
+.im-guanbi:before { content: "\e611"; }
+
+.im-8:before { content: "\e606"; }
 
 .im-kuozhanzujianzhuanhuan:before { content: "\e65a"; }
 
@@ -18,11 +23,17 @@
 
 .im-lunbozujian:before { content: "\e719"; }
 
+.im-cuowu:before { content: "\e61d"; }
+
 .im-article:before { content: "\e60b"; }
 
 .im-mobanzujianguanli:before { content: "\e65d"; }
 
+.im-jiesuo:before { content: "\e64f"; }
+
 .im-charuxing:before { content: "\e65e"; }
+
+.im-unie60a:before { content: "\e649"; }
 
 .im-moban:before { content: "\e86b"; }
 
@@ -37,6 +48,8 @@
 .im-browser:before { content: "\e724"; }
 
 .im-renwu2:before { content: "\e9a1"; }
+
+.im-iconfontlock:before { content: "\e64a"; }
 
 .im-guizezujian:before { content: "\e604"; }
 
@@ -149,6 +162,8 @@
 .im-SQLshenhe:before { content: "\e659"; }
 
 .im-wangluopinpaishu:before { content: "\e65b"; }
+
+.im-suoxiao1:before { content: "\e656"; }
 
 .im-guanyuwomen:before { content: "\e68d"; }
 
