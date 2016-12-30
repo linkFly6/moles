@@ -32,7 +32,16 @@ app.on('ready', function() {
 
         },
         movable: true,
-        titleBarStyle:'hidden' // hidden-inset
+        frame: false, // windows 下面隐藏标题栏
+        titleBarStyle:'hidden' // mac os 下面隐藏标题栏
+    });
+
+    ipcMain.on('window-close-window', () => {
+        app.quit();
+    });
+
+    ipcMain.on('window-hide-window', () => {
+        mainWindow.minimize();
     });
 
     // 加载应用的 index.html
@@ -44,10 +53,11 @@ app.on('ready', function() {
         protocol: 'file:',
         slashes: true
     }));
+
     mainWindow.isMenuBarVisible(false);
     mainWindow.setMenu(null);//置空菜单栏
     // 打开开发工具
-    // mainWindow.openDevTools();
+    mainWindow.openDevTools();
 
     //打开用户默认浏览器浏览指定的网页
     //shell.openExternal('https://tasaid.com');

@@ -70,7 +70,7 @@
         flex: 1;
         border-bottom: $border;
         border-top: $border;
-        max-height: 150px;
+        height: 150px;
         padding: 3px 10px;
         overflow-x: hidden;
         overflow-y: scroll;

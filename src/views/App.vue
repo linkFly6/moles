@@ -5,6 +5,20 @@
     width: 100%;
     height: 100%;
   }
+
+  /* 设置滚动条的样式 */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color:#f5f5f5;
+    }
+    /* 滚动条滑块 */
+    ::-webkit-scrollbar-thumb {
+        border-radius: 5px;
+        background: rgba(0,0,0,0.1);
+    }
   
   #app {
     width: 100%;
@@ -20,8 +34,7 @@
   #content {
     flex: 1;
     width: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 </style>
 

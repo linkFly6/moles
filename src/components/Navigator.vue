@@ -25,7 +25,31 @@
       cursor: default!important;
       .nav-more {
         height: $navHeight;
-        padding-top: 30px;
+        .windowBtns {
+            text-align:right;
+            .btn {
+                display:inline-block;
+                color:rgba(255, 255, 255, 0.7);
+                height: 30px;
+                line-height: 30px;
+                width: 46px;
+                text-align: center;
+                margin-left: -6px;
+                &:hover {
+                  background-color:rgba(0, 0, 0, 0.1);
+                  color:#fff;
+                }
+                &:active { 
+                  background-color:rgba(0, 0, 0, 0.3);
+                }
+            }
+            .min { 
+
+            }
+            .close { 
+
+            }
+        }
       }
       .home-logo {
         margin: $navHeight/2 auto 0;
@@ -114,6 +138,10 @@
         <mu-col width="100" tablet="10" desktop="10">
         </mu-col>
         <mu-col width="100" tablet="28" desktop="28" class="nav-more">
+          <div class="windowBtns">
+             <a class="btn min noDrag" href="javascript:;" @click="minWindow"><i class="icon-moles im-suoxiao1"></i></a>
+             <a class="btn close noDrag" href="javascript:;" @click="closeWindow"><i class="icon-moles im-guanbi"></i></a>
+          </div>
           <mu-text-field icon="search" hintText="搜索插件" class="noDrag" />
           <mu-icon-menu icon="more_vert" :anchorOrigin="{ horizontal: 'right', vertical: 'top'}" :targetOrigin="{horizontal: 'left', vertical: 'top'}"
             class="noDrag" style="vertical-align:middle;">
@@ -129,6 +157,7 @@
   </div>
 </template>
 <script>
+import { ipcRenderer } from 'electron'
 export default {
   data () {
     return {
@@ -147,6 +176,12 @@ export default {
     
   },
   methods: {
+    minWindow () {
+        ipcRenderer.send('window-hide-window');
+    },
+    closeWindow () {
+        ipcRenderer.send('window-close-window');
+    },
     toHome () {
       this.actionName = 'home';
       this.$router.push('/');
