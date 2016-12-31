@@ -37,6 +37,8 @@ $ node build/build.js
 $ electron .
 ```
 
+![moles](http://i1.piimg.com/567571/7bdcfcf65fee712b.png)
+
 国内 `npm` 访问速度略慢，可以使用 `cnpm` 代替 `npm` 安装包内容：
 
 ```
@@ -62,6 +64,3 @@ npm i -g cnpm --registry=https://registry.npm.taobao.org
 
  - 署名
  - 禁止商业演绎
-
-
-![moles](http://i1.piimg.com/567571/7bdcfcf65fee712b.png)
