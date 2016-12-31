@@ -26,7 +26,7 @@ app.on('ready', function() {
         minWidth: 1100,
         minHeight: 700,
         maximizable: true,
-        //resizable: false,
+        resizable: false, // 禁止缩放大小
         //autoHideMenuBar: true,
         webPreferences: {
 

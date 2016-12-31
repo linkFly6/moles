@@ -2,7 +2,7 @@
   .menus {
     width: 160px;
     height: 100%;
-    border-right: 1px solid #a8d7fa;
+    // border-right: 1px solid #a8d7fa;
     background: #f7f7f9;
     .list {
       height: 100%;

@@ -1,6 +1,9 @@
 <style lang="sass" scoped>
   @import "../sass/global.scss";
   .box-index {
+    height:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
     .main-box {
       padding: 10px;
       margin: 30px auto;

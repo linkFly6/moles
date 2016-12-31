@@ -53,7 +53,7 @@
       }
       width: 100%;
       th {
-        width: 100px;
+        width: 110px;
         text-align: right;
       }
       td,

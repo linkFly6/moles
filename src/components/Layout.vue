@@ -5,7 +5,7 @@
     display: flex;
     .view {
       overflow-x: hidden;
-      overflow-y: scroll;
+      overflow-y: auto;
       position: relative;
     }
     .main {

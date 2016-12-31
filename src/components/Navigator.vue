@@ -15,6 +15,7 @@
       -webkit-app-region: no-drag;
     }
     .navbar {
+      border-radius:0;
       background: rgba(29, 140, 224, 8);
       padding-left: 2rem;
       width: 100%;
@@ -35,19 +36,26 @@
                 width: 46px;
                 text-align: center;
                 margin-left: -6px;
+                transition:background-color linear .2s;
                 &:hover {
                   background-color:rgba(0, 0, 0, 0.1);
                   color:#fff;
                 }
                 &:active { 
                   background-color:rgba(0, 0, 0, 0.3);
+                  color:#fff;
                 }
             }
             .min { 
 
             }
             .close { 
-
+                &:hover {
+                    background-color:rgba(232, 17, 35, 1);
+                }
+                &:active { 
+                    background-color:rgba(232, 17, 35, .7);
+                }
             }
         }
       }
@@ -139,8 +147,8 @@
         </mu-col>
         <mu-col width="100" tablet="28" desktop="28" class="nav-more">
           <div class="windowBtns">
-             <a class="btn min noDrag" href="javascript:;" @click="minWindow"><i class="icon-moles im-suoxiao1"></i></a>
-             <a class="btn close noDrag" href="javascript:;" @click="closeWindow"><i class="icon-moles im-guanbi"></i></a>
+             <a class="btn min noDrag" @click="minWindow"><i class="icon-moles im-suoxiao1"></i></a>
+             <a class="btn close noDrag" @click="closeWindow"><i class="icon-moles im-guanbi"></i></a>
           </div>
           <mu-text-field icon="search" hintText="搜索插件" class="noDrag" />
           <mu-icon-menu icon="more_vert" :anchorOrigin="{ horizontal: 'right', vertical: 'top'}" :targetOrigin="{horizontal: 'left', vertical: 'top'}"

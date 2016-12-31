@@ -73,7 +73,7 @@
         height: 150px;
         padding: 3px 10px;
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
         p {
           margin: 0;
           padding: 0;
@@ -121,21 +121,21 @@
 
 <template>
   <div class="magicBar">
-    <div class="m-box" v-show="open">
+    <div class="m-box" v-show="isOpen">
       <div class="mb-header">
         <div class="mb-bar-title">
           <div class="name">输出</div>
           <div class="opratorBtns">
             <!--<a href="javascript:;" class="o-btn"><i class="icon-moles im-suoxiao1"></i></a>-->
-            <a title="锁定显示" href="javascript:;" class="o-btn" @click="toggleLock"><i class="icon-moles" :class="{ 'im-iconfontlock': lock, 'im-jiesuo': !lock }"></i></a>
-            <a title="关闭" href="javascript:;" class="o-btn" @click="close"><i class="icon-moles im-guanbi"></i></a>
+            <a title="锁定显示" class="o-btn" @click="toggleLock"><i class="icon-moles" :class="{ 'im-iconfontlock': isLock, 'im-jiesuo': !isLock }"></i></a>
+            <a title="关闭" class="o-btn" @click="close"><i class="icon-moles im-guanbi"></i></a>
           </div>
         </div>
         <div class="mb-options">
-          <a href="javascript:;" class="checkbox clear" @clear="clear"><i class="icon-moles im-yuandian"></i><span>清空</span></a>
-          <a href="javascript:;" class="checkbox error"><i class="icon-moles im-cuowu"></i><span>错误 {{errorCount}}</span></a>
-          <a href="javascript:;" class="checkbox warning"><i class="icon-moles im-8"></i><span>警告 {{warningCount}}</span></a>
-          <a href="javascript:;" class="checkbox info"><i class="icon-moles im-unie60a"></i><span>信息 {{infoCount}}</span></a>
+          <a class="checkbox clear" @clear="clear"><i class="icon-moles im-yuandian"></i><span>清空</span></a>
+          <a class="checkbox error"><i class="icon-moles im-cuowu"></i><span>错误 {{errorCount}}</span></a>
+          <a class="checkbox warning"><i class="icon-moles im-8"></i><span>警告 {{warningCount}}</span></a>
+          <a class="checkbox info"><i class="icon-moles im-unie60a"></i><span>信息 {{infoCount}}</span></a>
         </div>
       </div>
       <div class="mb-context">
@@ -145,7 +145,7 @@
     <div class="statusBar">
       <mu-flexbox>
         <mu-flexbox-item class="info">
-          <a class="toggle-btn" :class="{ 'active': open }" href="javascript:;" @click="toggleOpen">输出</a>
+          <a class="toggle-btn" :class="{ 'active': isOpen }" @click="toggleOpen">输出</a>
         </mu-flexbox-item>
       </mu-flexbox>
     </div>
@@ -158,7 +158,9 @@
         errorCount: 0,
         warningCount: 0,
         infoCount: 0,
-        messages: []
+        messages: [],
+        isOpen: this.open,
+        isLock: this.lock
       };
     },
     props: {
@@ -218,13 +220,13 @@
         this.$emit('clear')
       },
       toggleOpen() {
-        this.open = !this.open
+        this.isOpen = !this.isOpen
       },
       close() {
-        this.open = !this.open
+        this.isOpen = false
       },
       toggleLock() {
-        this.lock = !this.lock
+        this.isLock = !this.isLock
       }
     }
   }
