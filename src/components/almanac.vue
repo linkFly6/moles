@@ -1,8 +1,8 @@
 <style lang="sass" scoped>
   //老黄历
   .almanac {
-    & ul,
-    & li {
+    ul,
+    li {
       list-style: none;
       margin: 0;
       padding: 0;
