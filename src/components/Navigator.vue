@@ -117,13 +117,13 @@
                 <i class="icon-moles im-renwu2"></i>
               </mu-flat-button>
             </mu-flexbox-item>
-            <mu-flexbox-item class="nav-item">
+            <!--<mu-flexbox-item class="nav-item">
               <mu-flat-button label="编译" class="nav-btn" :class="{ active : actionName === 'build' }" @click="toBuild">
                 <i class="icon-moles im-guizezujian"></i>
               </mu-flat-button>
-            </mu-flexbox-item>
+            </mu-flexbox-item>-->
             <mu-flexbox-item class="nav-item">
-              <mu-flat-button label="压缩" class="nav-btn" :class="{ active : actionName === 'compress' }" @click="toCompress">
+              <mu-flat-button label="工具" class="nav-btn" :class="{ active : actionName === 'tools' }" @click="toTools">
                 <i class="icon-moles im-shousuo"></i>
               </mu-flat-button>
             </mu-flexbox-item>
@@ -200,10 +200,10 @@ export default {
     toBuild () {
       this.actionName = 'build';
     },
-    toCompress () {
-      this.actionName = 'compress';
+    toTools () {
+      this.actionName = 'tools';
       // this.$router.push({ name: 'compressQuick' });
-      this.$router.push('/compress/quick');
+      this.$router.push('/tools/quickCompress');
     },
     toPlugs () {
       this.actionName = 'plugs';

@@ -1,6 +1,6 @@
 import Home from '../views/Home';
-import CompressMenu from '../views/partial/Compress-Menu';
-import CompressQuick from '../views/Compress';
+import CompressMenu from '../views/partial/Tools-Menu';
+import QuickCompress from '../views/QuickCompress.vue';
 import Layout from '../components/Layout';
 
 export default
@@ -11,17 +11,17 @@ export default
       component: Home
     },
     {
-      path: '/compress',
-      name: 'compress',
+      path: '/tools',
+      name: 'tools',
       component: Layout,
       children: [
         {
-          path: 'quick',
-          name: 'compressQuick',
+          path: 'quickCompress',
+          name: 'quickCompress',
           // 妈蛋这里是 components，多了个 s
           components: {
             menu: CompressMenu,
-            content: CompressQuick
+            content: QuickCompress
           }
         }
       ]

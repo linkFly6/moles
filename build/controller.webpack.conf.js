@@ -1,5 +1,6 @@
 var webpack = require('webpack');
 var path = require('path');
+var nodeExternals = require('webpack-node-externals');
 
 var config = {
   devtool: 'source-map',// false 关闭调试
@@ -7,7 +8,8 @@ var config = {
     'app': './src/controller/main' // entry 表示入口文件，最终会从这个文件进入，进行打包
   },
   // 配置 webpack 打包环境，否则 webpack 会尝试打包原生模块，参见这里： https://github.com/webpack/docs/wiki/Configuration#target
-  target: 'electron',
+  target: 'electron-main',
+  externals: [nodeExternals()],// 排除掉 node 和项目安装的模块，否则 webpack 也会尝试打包项目中依赖的模块
   output: {
     // 打包后生成的的文件存储位置
     path: path.resolve(__dirname, '../dest/controller/'),

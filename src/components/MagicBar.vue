@@ -4,10 +4,17 @@
     background: #eeeef2;
     width: 100%;
     font-size: 12px;
+    position: relative;
     .m-box {
+      background: #eeeef2;
       border-top: $border;
       display: flex;
       flex-direction: column;
+      // 如果 lock 的话，这几个 css 应该去掉，因为它要在页面中占据空间
+      position: absolute;
+      z-index: 12;
+      width: 100%;
+      bottom: 28px;
       .mb-bar-title {
         background: #1d8ce0;
         padding: 1px 10px;
@@ -79,13 +86,13 @@
           padding: 0;
           text-align: justify;
           line-height: 1.8;
-          color: #F7BA2A;
+          color: rgba(0, 0, 0, 0.54);
         }
         .error{
           color: #FF4949;
         }
         .warning{
-          color: rgba(0, 0, 0, 0.54);
+          color: #F7BA2A;
         }
       }
     }
@@ -124,7 +131,7 @@
     <div class="m-box" v-show="isOpen">
       <div class="mb-header">
         <div class="mb-bar-title">
-          <div class="name">输出</div>
+          <div class="name">输出{{ messages.length ? ' ('+ messages.length +')': '' }}</div>
           <div class="opratorBtns">
             <!--<a href="javascript:;" class="o-btn"><i class="icon-moles im-suoxiao1"></i></a>-->
             <a title="锁定显示" class="o-btn" @click="toggleLock"><i class="icon-moles" :class="{ 'im-iconfontlock': isLock, 'im-jiesuo': !isLock }"></i></a>
@@ -132,20 +139,20 @@
           </div>
         </div>
         <div class="mb-options">
-          <a class="checkbox clear" @clear="clear"><i class="icon-moles im-yuandian"></i><span>清空</span></a>
+          <a class="checkbox clear" @click="clear"><i class="icon-moles im-yuandian"></i><span>清空</span></a>
           <a class="checkbox error"><i class="icon-moles im-cuowu"></i><span>错误 {{errorCount}}</span></a>
           <a class="checkbox warning"><i class="icon-moles im-8"></i><span>警告 {{warningCount}}</span></a>
           <a class="checkbox info"><i class="icon-moles im-unie60a"></i><span>信息 {{infoCount}}</span></a>
         </div>
       </div>
       <div class="mb-context">
-        <p v-for="item in messages" class="{ 'error': item.type === 'error', 'warning': item.type === 'warning' }">{{ item.message }}</p>
+        <p v-for="item in messages" :class="{ 'error': item.type === 'error', 'warning': item.type === 'warning' }">{{ item.message }}</p>
       </div>
     </div>
     <div class="statusBar">
       <mu-flexbox>
         <mu-flexbox-item class="info">
-          <a class="toggle-btn" :class="{ 'active': isOpen }" @click="toggleOpen">输出</a>
+          <a class="toggle-btn" :class="{ 'active': isOpen }" @click="toggleOpen">输出{{ messages.length ? ' ('+ messages.length +')': '' }}</a>
         </mu-flexbox-item>
       </mu-flexbox>
     </div>
@@ -192,15 +199,15 @@
     methods: {
       // 写普通信息
       log(...messages) {
-        this.infoCount += this.pushMessage('info', ...messages)
+        this.infoCount += this.pushMessage('info', messages)
       },
       // 写错误
       error(...messages) {
-        this.errorCount += this.pushMessage('error', ...messages)
+        this.errorCount += this.pushMessage('error', messages)
       },
       // 写警告
       warning(...messages) {
-        this.warningCount += this.pushMessage('warning', ...messages)
+        this.warningCount += this.pushMessage('warning', messages)
       },
       pushMessage(type, messages) {
         var messageCount = 0
@@ -210,13 +217,14 @@
             return;
           }
           let tmps = message.split('\n').map(item => { return { type: type, message: item } });
-          messageCount += tmps;
+          messageCount += tmps.length;
           this.messages.push.apply(this.messages, tmps);
         }, this);
         return messageCount;
       },
       clear() {
-        this.message = []
+        this.messages = [];
+        this.errorCount = this.warningCount = this.infoCount = 0;
         this.$emit('clear')
       },
       toggleOpen() {

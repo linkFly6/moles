@@ -78,6 +78,7 @@
     "vue-html-loader": "^1.2.3",
     "vue-loader": "^10.0.2",
     "vue-template-compiler": "^2.1.6",
+    "webpack-node-externals": "^1.5.4",
     "webpack-stream": "^3.2.0"
   }
 }

@@ -17,7 +17,8 @@ gulp.task('controller', function(callback) {
 //默认任务：命令 - gulp [default]
 gulp.task('default', function() {
     //监听js
-    gulp.watch(['src/views/*.*', 'src/sass/*.*', 'src/index.html'], ['view']);
+    gulp.watch(['src/**/*.*'/*, 'src/sass/*.*', 'src/index.html'*/], ['view']);
+    gulp.watch(['fonts/*.scss', 'fonts/*.css'], ['view']);
     //监听sass
     gulp.watch(['src/controller/*.*'], ['controller']);
     task.view();

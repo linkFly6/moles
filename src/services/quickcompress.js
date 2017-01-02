@@ -7,7 +7,7 @@
     //监听js压缩机制
     ipcMain.on('async-compressor-js', function (event, arg) {
 
-        if (typeof arg === 'object') {
+        if (_.isObject(arg)) {
             //原始字节数
             var oldBytes = Buffer.byteLength(arg.source, 'utf8'),
                 newBytes = 0,
