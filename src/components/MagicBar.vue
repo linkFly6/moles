@@ -11,10 +11,12 @@
       display: flex;
       flex-direction: column;
       // 如果 lock 的话，这几个 css 应该去掉，因为它要在页面中占据空间
-      position: absolute;
-      z-index: 12;
-      width: 100%;
-      bottom: 28px;
+      &.auto {
+        position: absolute;
+        z-index: 12;
+        width: 100%;
+        bottom: 28px;
+      }
       .mb-bar-title {
         background: #1d8ce0;
         padding: 1px 10px;
@@ -50,6 +52,7 @@
           line-height: 16px;
           .icon-moles {
             padding-right: 2px;
+            font-size: 12px;
           }
           &:hover,
           &.active {
@@ -128,13 +131,13 @@
 
 <template>
   <div class="magicBar">
-    <div class="m-box" v-show="isOpen">
+    <div class="m-box" v-show="isOpen" :class="{ auto : !isLock }">
       <div class="mb-header">
         <div class="mb-bar-title">
           <div class="name">输出{{ messages.length ? ' ('+ messages.length +')': '' }}</div>
           <div class="opratorBtns">
             <!--<a href="javascript:;" class="o-btn"><i class="icon-moles im-suoxiao1"></i></a>-->
-            <a title="锁定显示" class="o-btn" @click="toggleLock"><i class="icon-moles" :class="{ 'im-iconfontlock': isLock, 'im-jiesuo': !isLock }"></i></a>
+            <a :title="isLock ? '锁定显示' : '自动显示'" class="o-btn" @click="toggleLock"><i class="icon-moles" :class="{ 'im-iconfontlock': isLock, 'im-jiesuo': !isLock }"></i></a>
             <a title="关闭" class="o-btn" @click="close"><i class="icon-moles im-guanbi"></i></a>
           </div>
         </div>
@@ -179,7 +182,7 @@
       // 是否锁定显示
       lock: {
         type: Boolean,
-        default: true
+        default: false
       }
     },
     watch: {
@@ -220,6 +223,10 @@
           messageCount += tmps.length;
           this.messages.push.apply(this.messages, tmps);
         }, this);
+        // auto 模式下自动弹出
+        if (messageCount > 0 && !this.isLock) {
+          this.isOpen = true;
+        }
         return messageCount;
       },
       clear() {

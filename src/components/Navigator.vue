@@ -26,6 +26,9 @@
       cursor: default!important;
       .nav-more {
         height: $navHeight;
+        &.noWindows {
+          padding-top: 15px;
+        }
         .windowBtns {
             text-align:right;
             .btn {
@@ -145,69 +148,77 @@
         </mu-col>
         <mu-col width="100" tablet="10" desktop="10">
         </mu-col>
-        <mu-col width="100" tablet="28" desktop="28" class="nav-more">
-          <div class="windowBtns">
-             <a class="btn min noDrag" @click="minWindow"><i class="icon-moles im-suoxiao1"></i></a>
-             <a class="btn close noDrag" @click="closeWindow"><i class="icon-moles im-guanbi"></i></a>
+        <mu-col width="100" tablet="28" desktop="28" class="nav-more" :class="{ noWindows: !isWindows }">
+          <div class="windowBtns" v-if="isWindows">
+            <a class="btn min noDrag" @click="minWindow"><i class="icon-moles im-suoxiao1"></i></a>
+            <a class="btn close noDrag" @click="closeWindow"><i class="icon-moles im-guanbi"></i></a>
           </div>
           <mu-text-field icon="search" hintText="搜索插件" class="noDrag" />
           <mu-icon-menu icon="more_vert" :anchorOrigin="{ horizontal: 'right', vertical: 'top'}" :targetOrigin="{horizontal: 'left', vertical: 'top'}"
             class="noDrag" style="vertical-align:middle;">
-            <mu-menu-item title="Refresh" />
-            <mu-menu-item title="Send feedback" />
-            <mu-menu-item title="Settings" />
-            <mu-menu-item title="Help" />
-            <mu-menu-item title="Sign out" />
-          </mu-icon-menu>
-        </mu-col>
-      </mu-row>
-    </mu-paper>
-  </div>
+<mu-menu-item title="设置" />
+<mu-menu-item title="反馈" />
+<mu-menu-item title="帮助" />
+<mu-menu-item title="关于" />
+</mu-icon-menu>
+</mu-col>
+</mu-row>
+</mu-paper>
+</div>
 </template>
 <script>
-import { ipcRenderer } from 'electron'
-export default {
-  data () {
-    return {
-      actionName: 'home'
-    }
-  },
-  components: {
-  },
-  events: {
-    
-  },
-  updated () {
-    
-  },
-  mounted () {
-    
-  },
-  methods: {
-    minWindow () {
+  import { ipcRenderer } from 'electron'
+  export default {
+    data() {
+      return {
+        actionName: 'home',
+        isWindows: true
+      }
+    },
+    components: {
+    },
+    events: {
+
+    },
+    updated() {
+
+    },
+    mounted() {
+      var me = this;
+      // 只需要监听一次请求即可
+      ipcRenderer.once('window-async-get-os-reply', function (event, osType) {
+        // 不是 windows 系统，则隐藏关闭按钮
+        if (!~osType.indexOf('windows')) {
+          me.isWindows = false
+        }
+      });
+      ipcRenderer.send('window-async-get-os-send');
+    },
+    methods: {
+      minWindow() {
         ipcRenderer.send('window-hide-window');
-    },
-    closeWindow () {
+      },
+      closeWindow() {
         ipcRenderer.send('window-close-window');
-    },
-    toHome () {
-      this.actionName = 'home';
-      this.$router.push('/');
-    },
-    toTask () {
-      this.actionName = 'task';
-    },
-    toBuild () {
-      this.actionName = 'build';
-    },
-    toTools () {
-      this.actionName = 'tools';
-      // this.$router.push({ name: 'compressQuick' });
-      this.$router.push('/tools/quickCompress');
-    },
-    toPlugs () {
-      this.actionName = 'plugs';
+      },
+      toHome() {
+        this.actionName = 'home';
+        this.$router.push('/');
+      },
+      toTask() {
+        this.actionName = 'task';
+      },
+      toBuild() {
+        this.actionName = 'build';
+      },
+      toTools() {
+        this.actionName = 'tools';
+        // this.$router.push({ name: 'compressQuick' });
+        this.$router.push('/tools/quickCompress');
+      },
+      toPlugs() {
+        this.actionName = 'plugs';
+      }
     }
   }
-}
 </script>

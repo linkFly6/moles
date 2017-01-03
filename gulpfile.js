@@ -20,7 +20,7 @@ gulp.task('default', function() {
     gulp.watch(['src/**/*.*'/*, 'src/sass/*.*', 'src/index.html'*/], ['view']);
     gulp.watch(['fonts/*.scss', 'fonts/*.css'], ['view']);
     //监听sass
-    gulp.watch(['src/controller/*.*'], ['controller']);
-    task.view();
+    // gulp.watch(['src/controller/*.*'], ['controller']);
+    // task.view();
     // task.controller();
 });

@@ -7,7 +7,7 @@
   }
     a { cursor:pointer; }
 
-  /* ÉèÖÃ¹ö¶¯ÌõµÄÑùÊ½ */
+  /* è®¾ç½®æ»šåŠ¨æ¡çš„æ ·å¼ */
     ::-webkit-scrollbar {
         width: 10px;
     }
@@ -15,7 +15,7 @@
     ::-webkit-scrollbar-track {
       background-color:#f5f5f5;
     }
-    /* ¹ö¶¯Ìõ»¬¿é */
+    /* æ»šåŠ¨æ¡æ»‘å— */
     ::-webkit-scrollbar-thumb {
         border-radius: 5px;
         background: rgba(0,0,0,0.1);
