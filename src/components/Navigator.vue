@@ -188,7 +188,7 @@
       // 只需要监听一次请求即可
       ipcRenderer.once('window-async-get-os-reply', function (event, osType) {
         // 不是 windows 系统，则隐藏关闭按钮
-        if (!~osType.indexOf('windows')) {
+        if (!~osType.toLowerCase().indexOf('windows')) {
           me.isWindows = false
         }
       });

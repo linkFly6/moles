@@ -216,7 +216,8 @@
         deep: true
       }
     },
-    mounted() {
+    created () {
+      // 切换到别的页面，再切换回来，这里会被重复执行，而这里的代码只需要执行一次，所以放到 created
       var me = this
       //从本地存储读取配置
       storage.get(STORAGENAME, function (error, data) {
@@ -231,7 +232,7 @@
           }
         }
       });
-      //压缩完成
+      // 压缩完成 TODO 放到这里也不行， this 改变了
       ipcRenderer.on('tools-async-quick-compressor-js-reply', function (event, err, data, extra, oldBytes, newBytes, timer) {//事件源，错误，压缩后的代码，警告，压缩前bytes，压缩后bytes，压缩耗时（ms）
         me.loading = false;
         var magicBar = me.$refs.magicBar;
@@ -249,6 +250,9 @@
           me.newCodeSource = data.code;
         }
       });
+    },
+    mounted() {
+      
     },
     methods: {
       compressChange(selectType) {
