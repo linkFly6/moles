@@ -5,11 +5,16 @@
   "version": "0.2.0",
   "configurations": [
     {
-      // "type": "node",
-      // "request": "launch",
-      // "name": "启动程序",
-      // "program": "${workspaceRoot}/dest/controller/app.js",
-      // "cwd": "${workspaceRoot}"
+
+      // 这里是应用程序入口，配合 Electron 来进行调试的
+      "type": "node",
+      "request": "launch",
+      "name": "启动程序",
+      "program": "${workspaceRoot}/dest/controller/app.js",
+      "cwd": "${workspaceRoot}"
+
+      /* gulp 调试 */
+      /*
       "type": "node",
       "request": "launch",
       "name": "启动程序",
@@ -18,12 +23,22 @@
       "args": [
         "default"
       ]
+      */
     },
+    
+    /* vsc 调试 */
+    /*
+    使用命令 electron --debug-brk=5858 . 
+    然后点击vsc的调试，左上角的 "启动程序" 改成 "附加到进程"
+    会在程序第一行就断行，这样就可以直接调试
+
+    */
     {
       "type": "node",
       "request": "attach",
       "name": "附加到进程",
-      "port": 5858
+      "port": 5858,
+      "address": "localhost"
     }
   ]
 }
