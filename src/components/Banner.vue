@@ -1,5 +1,4 @@
 <style lang="sass" scoped>
-  @import "../sass/global.scss";
   %backface {
     -webkit-overflow-scrolling: touch;
     -webkit-backface-visibility: hidden;
@@ -10,6 +9,13 @@
     transition: .6s;
   }
   
+  /*//小屏幕
+  $screen-sm-width: 768px;
+  //中屏幕
+  $screen-md-width: 940px;
+  //大屏幕
+  $screen-lg-width: 1200px;*/
+
   .banner-box {
     width: 100%;
     margin: 20px auto 30px;
@@ -21,10 +27,10 @@
       @extend %backface;
       width: 500px;
       height: 176px;
-      @media screen and (min-width: $screen-lg-width) {
+      /*@media screen and (min-width: $screen-lg-width) {
         width: 45%;
         height: 200px;
-      }
+      }*/
       div {
         width: 100%;
         height: 100%;
@@ -59,16 +65,16 @@
       z-index: 1;
       opacity: 0;
       transform: translateX(-550px) translateZ(-300px) rotateY(20deg);
-      @media screen and (min-width: $screen-lg-width) {
+      /*@media screen and (min-width: $screen-lg-width) {
         transform: translateX(-600px) translateZ(-300px) rotateY(20deg);
-      }
+      }*/
     }
     .i-box2 {
       z-index: 2;
       transform: translateX(-450px) translateZ(-250px) rotateY(45deg);
-      @media screen and (min-width: $screen-lg-width) {
+      /*@media screen and (min-width: $screen-lg-width) {
         transform: translateX(-500px) translateZ(-250px) rotateY(45deg);
-      }
+      }*/
     }
     .i-box3 {
       z-index: 10;
@@ -80,17 +86,17 @@
     .i-box4 {
       z-index: 2;
       transform: translateX(450px) translateZ(-250px) rotateY(-45deg);
-      @media screen and (min-width: $screen-lg-width) {
+      /*@media screen and (min-width: $screen-lg-width) {
         transform: translateX(550px) translateZ(-250px) rotateY(-45deg);
-      }
+      }*/
     }
     .i-box5 {
       z-index: 1;
       opacity: 0;
       transform: translateX(550px) translateZ(-300px) rotateY(-20deg);
-      @media screen and (min-width: $screen-lg-width) {
+      /*@media screen and (min-width: $screen-lg-width) {
         transform: translateX(650px) translateZ(-250px) rotateY(-45deg);
-      }
+      }*/
       /*background-color: #ddd*/
     }
   }

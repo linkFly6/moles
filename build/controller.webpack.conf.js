@@ -31,7 +31,7 @@ var config = {
         exclude: /node_modules/,
         query: {
           "presets": ["electron", "stage-2"],
-          // "plugins": ["transform-runtime"],
+          "plugins": ["transform-runtime"],
           // "plugins": [
           //   "transform-es2015-modules-commonjs",
           //   "transform-es2015-spread",

@@ -28,10 +28,10 @@
                     presets: [/*'es2015'*/],//预设插件（一组插件），内置了"es2015","react"
                     //插件列表
                     plugins: [
-                            "babel-plugin-transform-es2015-template-literals",//字符串模板 http://babeljs.io/docs/plugins/transform-es2015-template-literals/
-                            "babel-plugin-transform-es2015-literals",//http://babeljs.io/docs/plugins/transform-es2015-literals/ 尼玛官网一点解释都没
-                            "babel-plugin-transform-es2015-function-name",//http://babeljs.io/docs/plugins/transform-es2015-function-name/  官网也木有解释
-                            "babel-plugin-transform-es2015-arrow-functions",//箭头函数  http://babeljs.io/docs/plugins/transform-es2015-arrow-functions/
+                            "babel-plugin-transform-es2015-template-literals",// 字符串模板 http://babeljs.io/docs/plugins/transform-es2015-template-literals/
+                            "babel-plugin-transform-es2015-literals",// http://babeljs.io/docs/plugins/transform-es2015-literals/ 尼玛官网一点解释都没
+                            "babel-plugin-transform-es2015-function-name",// http://babeljs.io/docs/plugins/transform-es2015-function-name/  官网也木有解释
+                            "babel-plugin-transform-es2015-arrow-functions",// 箭头函数  http://babeljs.io/docs/plugins/transform-es2015-arrow-functions/
                             "babel-plugin-transform-es2015-block-scoped-functions",//函数块级作用域 http://babeljs.io/docs/plugins/transform-es2015-block-scoped-functions/
                             "babel-plugin-transform-es2015-classes",//ES6 Class http://babeljs.io/docs/plugins/transform-es2015-classes/
                             "babel-plugin-transform-es2015-object-super",//super提供了调用prototype的方式 http://babeljs.io/docs/plugins/transform-es2015-object-super/

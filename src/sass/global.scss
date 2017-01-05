@@ -38,13 +38,6 @@ a, button {
     padding-top: 50px;
 }*/
 
-//小屏幕
-$screen-sm-width: 768px;
-//中屏幕
-$screen-md-width: 940px;
-//大屏幕
-$screen-lg-width: 1200px;
-
 .center {
     text-align: center;
 }
@@ -52,4 +45,74 @@ $screen-lg-width: 1200px;
 
 .nav-box {
     border-radius: 0;
+}
+
+// textarea
+
+.textarea {
+    border: 1px solid #ccc;
+    display: block;
+    background: #fff url('../resource/logo-text.png') no-repeat  90% 80%;
+    box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
+    resize: none;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    border-radius: 4px;
+    padding: 6px 12px;
+    width: 100%;
+    outline: 0;
+    height: 200px;
+    &:focus {
+      border-color: #66afe9;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
+    }
+    &::-webkit-input-placeholder {
+      color: #ccccce;
+    }
+}
+
+
+// 基本功能区域容器布局
+
+.container-main {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    // 主区域容器 （另一个区域是 magicBar） 
+    .main-box { // 降低 css 优先级
+      overflow-y: auto;
+      flex:1;
+    }
+      // 顶部操作按钮栏
+      .menu-bar {
+        padding-bottom: 5px;
+        margin: 0 15px;
+        padding: 5px 0;
+      }
+
+      // 展开收起的配置栏
+      .optionsBar {
+        background: #fafafa;
+        box-shadow:inset 0 1px 1px 0 #c7c7c7;
+        overflow: hidden;
+        height: 1px;
+        transition: height linear .2s;
+        border-bottom: 1px solid #eee;
+
+        .optionsContainer {
+          // 配置栏容器
+          padding: 15px;
+        }
+      }
+
+      // 正文
+      .layout-context {
+        padding: 15px;
+      }
+    
+
+    .cell {
+      display: inline-block;
+      margin-right: 10px;
+    }
 }

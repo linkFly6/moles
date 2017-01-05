@@ -1,5 +1,4 @@
 <style lang="sass" scoped>
-  @import "../sass/global.scss";
   .box-index {
     height:100%;
     overflow-x:hidden;

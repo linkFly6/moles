@@ -53,7 +53,7 @@
 export default {
   data () {
     return {
-      actionName: 'quickCompress'
+      actionName: this.$route.name
     };
   },
   components: {
@@ -69,9 +69,11 @@ export default {
   methods: {
     toQuickCompress () {
       this.actionName = 'quickCompress';
+      this.$router.push('/tools/quickCompress');
     },
     toQuickCompile () {
       this.actionName = 'quickCompile';
+      this.$router.push('/tools/quickCompile');
     },
     toFormat () {
       this.actionName = 'format';

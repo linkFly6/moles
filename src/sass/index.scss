@@ -24,10 +24,10 @@
             width: 500px;
             height: 176px;
 
-            @media screen and (min-width: $screen-lg-width) {
-                width: 45%;
-                height: 300px;
-            }
+            // @media screen and (min-width: $screen-lg-width) {
+            //     width: 45%;
+            //     height: 300px;
+            // }
 
             div {
                 width: 100%;
@@ -67,18 +67,18 @@
             opacity: 0;
             transform: translateX(-550px) translateZ(-300px) rotateY(20deg);
 
-            @media screen and (min-width: $screen-lg-width) {
-                transform: translateX(-600px) translateZ(-300px) rotateY(20deg);
-            }
+            // @media screen and (min-width: $screen-lg-width) {
+            //     transform: translateX(-600px) translateZ(-300px) rotateY(20deg);
+            // }
         }
 
         .i-box2 {
             z-index: 2;
             transform: translateX(-450px) translateZ(-250px) rotateY(45deg);
 
-            @media screen and (min-width: $screen-lg-width) {
-                transform: translateX(-500px) translateZ(-250px) rotateY(45deg);
-            }
+            // @media screen and (min-width: $screen-lg-width) {
+            //     transform: translateX(-500px) translateZ(-250px) rotateY(45deg);
+            // }
         }
 
         .i-box3 {
@@ -92,9 +92,9 @@
             z-index: 2;
             transform: translateX(450px) translateZ(-250px) rotateY(-45deg);
 
-            @media screen and (min-width: $screen-lg-width) {
-                transform: translateX(550px) translateZ(-250px) rotateY(-45deg);
-            }
+            // @media screen and (min-width: $screen-lg-width) {
+            //     transform: translateX(550px) translateZ(-250px) rotateY(-45deg);
+            // }
         }
 
         .i-box5 {
@@ -102,9 +102,9 @@
             opacity: 0;
             transform: translateX(550px) translateZ(-300px) rotateY(-20deg);
 
-            @media screen and (min-width: $screen-lg-width) {
-                transform: translateX(650px) translateZ(-250px) rotateY(-45deg);
-            }
+            // @media screen and (min-width: $screen-lg-width) {
+            //     transform: translateX(650px) translateZ(-250px) rotateY(-45deg);
+            // }
             /*background-color: #ddd*/
         }
     }

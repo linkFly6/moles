@@ -1,6 +1,7 @@
 import Home from '../views/Home';
 import CompressMenu from '../views/partial/Tools-Menu';
 import QuickCompress from '../views/QuickCompress.vue';
+import QuickCompile from '../views/QuickCompile.vue';
 import Layout from '../components/Layout';
 
 export default
@@ -22,6 +23,15 @@ export default
           components: {
             menu: CompressMenu,
             content: QuickCompress
+          }
+        },
+        {
+          path: 'quickCompile',
+          name: 'quickCompile',
+          // 妈蛋这里是 components，多了个 s
+          components: {
+            menu: CompressMenu,
+            content: QuickCompile
           }
         }
       ]

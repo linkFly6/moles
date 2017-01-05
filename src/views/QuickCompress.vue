@@ -1,68 +1,22 @@
 <style lang="sass">
   .quick-compress {
-    position: relative;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    .main-box {
-      overflow-y: auto;
-      flex:1;
+    .select-type {
+      vertical-align: middle;
+      margin-bottom: 0;
+      width: 120px;
+      text-align: center;
     }
-    .box {
-      padding:15px;
+    /*.active {
+      background-color: rgba(204, 204, 206, 0.87);
+    }*/
+
+    .menu-bar {
+      padding: 6px 0;
     }
-    .cell {
-      display: inline-block;
-      margin-right: 10px;
-    }
-    .content-menu-bar {
-      /*border-bottom: 1px solid rgba(0,0,0,.12);*/
-      padding-bottom: 5px;
-      margin: 0 15px;
-      padding: 5px 0;
-      .select-type {
-        vertical-align: middle;
-        margin-bottom: 0;
-        width: 120px;
-        text-align: center;
-      }
-      /*.active {
-        background-color: rgba(204, 204, 206, 0.87);
-      }*/
-    }
+
     .compress-options {
-      background: #fafafa;
-      box-shadow:inset 0 1px 1px 0 #c7c7c7;
-      overflow: hidden;
-      height: 1px;
-      transition: height linear .2s;
-      border-bottom: 1px solid #eee;
       &.jsOpen {
         height: 105px;
-      }
-
-      .opt-box {
-        padding: 15px;
-      }
-    }
-    .textarea {
-      border: 1px solid #ccc;
-      display: block;
-      background: #fff url('../resource/logo-text.png') no-repeat  90% 80%;
-      box-shadow:inset 0 1px 1px rgba(0,0,0,.075);
-      resize: none;
-      transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
-      border-radius: 4px;
-      padding: 6px 12px;
-      width: 100%;
-      outline: 0;
-      height: 200px;
-      &:focus {
-        border-color: #66afe9;
-        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102,175,233,.6);
-      }
-      &::-webkit-input-placeholder {
-        color: #ccccce;
       }
     }
     .btn-box {
@@ -73,9 +27,9 @@
 </style>
 
 <template>
-  <div class="quick-compress">
+  <div class="container-main quick-compress">
     <div class="main-box">
-      <div class="content-menu-bar">
+      <div class="menu-bar">
         <span class="cell">压缩类型：</span>
         <mu-select-field v-model="compressType" class="select-type cell">
           <mu-menu-item value="js" title="JavaScript" />
@@ -85,8 +39,8 @@
         <mu-raised-button label="压缩选项" class="cell" :class="{ hover: openOptionsBar }" @click="toggleOptionsBar" />
       </div>
       <!--压缩选项文档：http://www.xv90.com/post-113.html  ，  http://blog.fens.me/nodejs-uglifyjs2-js/-->
-      <div class="compress-options" :class="{ jsOpen: openOptionsBar && compressType ==='js' }">
-        <div class="opt-box jsOptions">
+      <div class="optionsBar compress-options" :class="{ jsOpen: openOptionsBar && compressType ==='js' }">
+        <div class="layout-context jsOptions">
           <mu-row class="options-bar">
             <mu-col width="100" tablet="50" desktop="20">
               <mu-switch label="合并多个变量声明" title="合并多个变量声明，加入连续的var语句&#10;关闭后易于压缩代码调试，但会降低压缩率" v-model="jsOptions.join_vars" />
@@ -134,21 +88,17 @@
 </mu-row>
 </div>
 </div>
-<div class="box">
-  <mu-snackbar v-if="toast" message="成功复制代码" @close="hideToast" style="position: absolute;"/>
-  <div>
+  <div class="layout-context">
+    <mu-snackbar v-if="toast" message="成功复制代码" @close="hideToast" style="position: absolute;"/>
     <textarea class="textarea" placeholder="要压缩的代码" v-model.trim="oldCodeSource"></textarea>
+    <div class="btn-box">
+      <mu-raised-button label="压缩" :class="{ hover: loading }" @click="compress" primary>
+        <mu-circular-progress :size="20" color="#fff" style="padding-left:10px;line-height:20px;" v-show="loading" :disabled="loading"/>
+      </mu-raised-button>
+      <mu-raised-button label="复制压缩后的代码" :disabled="!newCodeSource" @click="copyToClipboard" />
+    </div>
+    <textarea class="textarea" placeholder="压缩完毕的代码" v-model.trim="newCodeSource"></textarea>
   </div>
-  <div class="btn-box">
-    <mu-raised-button label="压缩" :class="{ hover: loading }" @click="compress" primary>
-      <mu-circular-progress :size="20" color="#fff" style="padding-left:10px;line-height:20px;" v-show="loading" :disabled="loading"/>
-</mu-raised-button>
-<mu-raised-button label="复制压缩后的代码" :disabled="!newCodeSource" @click="copyToClipboard" />
-</div>
-<div>
-  <textarea class="textarea" placeholder="压缩完毕的代码" v-model.trim="newCodeSource"></textarea>
-</div>
-</div>
 </div>
 <magic-bar ref="magicBar"></magic-bar>
 </div>
@@ -216,7 +166,7 @@
         deep: true
       }
     },
-    created () {
+    created() {
       // 切换到别的页面，再切换回来，这里会被重复执行，而这里的代码只需要执行一次，所以放到 created
       var me = this
       //从本地存储读取配置
@@ -252,7 +202,7 @@
       });
     },
     mounted() {
-      
+
     },
     methods: {
       compressChange(selectType) {
