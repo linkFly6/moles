@@ -13,11 +13,11 @@
       background-color: rgba(204, 204, 206, 0.87);
     }*/
     .compile-options {
-      &.parsetOpen {
+      &.presetOpen {
         height: 82px;
       }
       &.optionsOpen {
-        height: 134px;
+        height: 55px;
       }
     }
     .btn-box {
@@ -32,96 +32,47 @@
     <div class="main-box">
       <div class="menu-bar">
         <mu-raised-button label="转换器" class="cell" :class="{ hover: openBarIndex === 0 }" @click="toggleOptionsBar(0)" />
-        <mu-raised-button label="编译选项" class="cell" :class="{ hover: openBarIndex === 1 }" @click="toggleOptionsBar(1)" :disabled="!showBabelPlugsBar"
-        />
+        <mu-raised-button label="编译选项" class="cell" :class="{ hover: openBarIndex === 1 }" @click="toggleOptionsBar(1)" />
       </div>
       <!--压缩选项文档：http://www.xv90.com/post-113.html  ，  http://blog.fens.me/nodejs-uglifyjs2-js/-->
-      <div class="optionsBar compile-options" :class="{ parsetOpen: openBarIndex === 0, optionsOpen: openBarIndex === 1 }">
-        <!--babel parset-->
-        <div class="layout-context" v-show="openBarIndex === 0">
+      <div class="optionsBar compile-options" :class="{ presetOpen: openBarIndex === 0, optionsOpen: openBarIndex === 1 }">
+        <!--babel presets-->
+        <div class="layout-context" v-show="openBarIndex === 0" style="padding-left: 110px;">
           <mu-row class="options-bar">
             <mu-col width="100" tablet="50" desktop="25">
-              <mu-switch label="ES2015" v-model="babelParsets.es2015" />
+              <mu-switch label="es2015" v-model="babelPresets.es2015" />
             </mu-col>
             <mu-col width="100" tablet="50" desktop="25">
-              <mu-switch label="ES2016" v-model="babelParsets.es2016" />
+              <mu-switch label="es2016" v-model="babelPresets.es2016" />
             </mu-col>
             <mu-col width="100" tablet="50" desktop="25">
-              <mu-switch label="ES2017" v-model="babelParsets.es2017" />
+              <mu-switch label="es2017" v-model="babelPresets.es2017" />
             </mu-col>
             <mu-col width="100" tablet="50" desktop="25">
-              <mu-switch label="React" v-model="babelParsets.react" />
+              <mu-switch label="react" v-model="babelPresets.react" />
             </mu-col>
           </mu-row>
           <mu-row class="options-bar">
             <mu-col width="100" tablet="50" desktop="25">
-              <mu-switch label="stage-0" v-model="babelParsets['stage-0']" />
+              <mu-switch label="stage-0" v-model="babelPresets['stage-0']" />
             </mu-col>
             <mu-col width="100" tablet="50" desktop="25">
-              <mu-switch label="stage-1" v-model="babelParsets['stage-1']" />
+              <mu-switch label="stage-1" v-model="babelPresets['stage-1']" />
             </mu-col>
             <mu-col width="100" tablet="50" desktop="25">
-              <mu-switch label="stage-2" v-model="babelParsets['stage-2']" />
+              <mu-switch label="stage-2" v-model="babelPresets['stage-2']" />
             </mu-col>
             <mu-col width="100" tablet="50" desktop="25">
-              <mu-switch label="stage-3" v-model="babelParsets['stage-3']" />
+              <mu-switch label="stage-3" v-model="babelPresets['stage-3']" />
             </mu-col>
           </mu-row>
         </div>
         <!--babel plugs-->
-        <div class="layout-context" v-show="openBarIndex === 1">
+        <div class="layout-context" v-show="openBarIndex === 1" style="text-align: center;">
           <mu-row class="options-bar">
             <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="字符串模板" title="编译字符串模板" v-model="babelOptions.templateLiterals" />
+              <mu-switch label="Runtime" title="通用运行时" v-model="babelOptions.transformRuntime" />
             </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="箭头函数" title="编译箭头函数" v-model="babelOptions.arrowFunctions" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="函数块级作用域" title="函数块级作用域" v-model="babelOptions.blockScopedFunctions" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="编译Class" title="编译Class" v-model="babelOptions.classes" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="对象快捷属性" title="对象快捷属性&#10;如obj = { x, y }" v-model="babelOptions.shorthandProperties" />
-            </mu-col>
-          </mu-row>
-          <mu-row class="options-bar">
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="重复属性转换" title="重复属性转换&#10;当检测到属性重复，则采用[对象中括号属性]处理" v-model="babelOptions.shorthandKeys" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="对象中括号属性" title="对象中括号属性&#10;var obj = { ['x'] : 1 }" v-model="babelOptions.computedProperties" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="for...of" title="编译for...of语法" v-model="babelOptions.forOf" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="正则标记(y)" title="正则新的标记/y（sticky-regex） - /^foo/y" v-model="babelOptions.stickyRegex" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="正则标记(u)" title="正则新的标记/u（unicode-regex） - /\u{61}/u" v-model="babelOptions.unicodeRegex" />
-            </mu-col>
-          </mu-row>
-          <mu-row class="options-bar">
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="const常量" title="const常量" v-model="babelOptions.constants" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="扩展运算符" title="扩展运算符&#10;function foo(bar,...values){ }" v-model="babelOptions.spread" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="参数默认值" title="默认参数值和扩展运算符&#10;function (a, b = 1, c :: String) { }" v-model="babelOptions.parameters" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="赋值解构" title="赋值解构&#10;let { foo, bar } = foz();" v-model="babelOptions.destructuring" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="let和const作用域" title="let和const使用块级作用域" v-model="babelOptions.blockScoping" />
-            </mu-col>
-          </mu-row>
-          <mu-row class="options-bar" style="justify-content:flex-start">
             <mu-col width="100" tablet="50" desktop="20">
               <mu-switch label="commonJS" title="编译为commonJS模块&#10;和AMD/UMD编译选项不兼容" v-model="babelOptions.modulesCommonjs" />
             </mu-col>
@@ -130,12 +81,6 @@
             </mu-col>
             <mu-col width="100" tablet="50" desktop="20">
               <mu-switch label="UMD" title="编译为UMD模块&#10;和commonJS/AMD编译选项不兼容" v-model="babelOptions.modulesUmd" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="幂运算" title="幂运算，ES2016 规范" v-model="babelOptions.exponentiationOperator" />
-            </mu-col>
-            <mu-col width="100" tablet="50" desktop="20">
-              <mu-switch label="Runtime" title="通用运行时" v-model="babelOptions.transformRuntime" />
             </mu-col>
           </mu-row>
         </div>
@@ -181,35 +126,35 @@
         oldCodeSource: '', // 压缩前的代码
         newCodeSource: '', // 压缩后的代码
         loading: false,
-        babelParsets: {
+        babelPresets: {
           // http://babeljs.io/docs/plugins/#presets
-          'es2015': false,
+          'es2015': true,
           'es2016': false,
           'es2017': false,
           'stage-0': false,
           'stage-1': false,
           'stage-2': false,
-          'stage-3': false,
-          'react': false
+          'stage-3': true,
+          'react': true
         },
         babelOptions: {
           // http://babeljs.io/docs/plugins/
-          templateLiterals: true, // 编译字符串模板
-          arrowFunctions: true, // 编译箭头函数
-          blockScopedFunctions: true, // 函数块级作用域
-          classes: true, // 编译Class
-          shorthandProperties: true, // 对象快捷属性&#10;如obj = { x, y }
-          shorthandKeys: true, // 重复属性转换&#10;当检测到属性重复，则采用[对象中括号属性]处理
-          computedProperties: true, // 对象中括号属性&#10;var obj = { ['x'] : 1 }
-          forOf: true, // 编译for...of语法
-          stickyRegex: true, // 正则新的标记/y（sticky-regex） - /^foo/y
-          unicodeRegex: true, // 正则新的标记/u（unicode-regex） - /\u{61}/u
-          constants: true, // const常量
-          spread: true, // 扩展运算符&#10;function foo(bar,...values){ }
-          parameters: true, // 默认参数值和扩展运算符&#10;function (a, b = 1, c :: String) { }
-          destructuring: true, // 赋值解构&#10;let { foo, bar } = foz();
-          blockScoping: true, // let和const使用块级作用域
-          modulesCommonjs: true, // 编译为commonJS模块&#10;和AMD/UMD编译选项不兼容
+          templateLiterals: false, // 编译字符串模板
+          arrowFunctions: false, // 编译箭头函数
+          blockScopedFunctions: false, // 函数块级作用域
+          classes: false, // 编译Class
+          shorthandProperties: false, // 对象快捷属性&#10;如obj = { x, y }
+          shorthandKeys: false, // 重复属性转换&#10;当检测到属性重复，则采用[对象中括号属性]处理
+          computedProperties: false, // 对象中括号属性&#10;var obj = { ['x'] : 1 }
+          forOf: false, // 编译for...of语法
+          stickyRegex: false, // 正则新的标记/y（sticky-regex） - /^foo/y
+          unicodeRegex: false, // 正则新的标记/u（unicode-regex） - /\u{61}/u
+          constants: false, // const常量
+          spread: false, // 扩展运算符&#10;function foo(bar,...values){ }
+          parameters: false, // 默认参数值和扩展运算符&#10;function (a, b = 1, c :: String) { }
+          destructuring: false, // 赋值解构&#10;let { foo, bar } = foz();
+          blockScoping: false, // let和const使用块级作用域
+          modulesCommonjs: false, // 编译为commonJS模块&#10;和AMD/UMD编译选项不兼容
           modulesAmd: false, // 编译为AMD模块&#10;和commonJS/UMC编译选项不兼容
           modulesUmd: false, // 编译为UMD模块&#10;和commonJS/AMD编译选项不兼容
           exponentiationOperator: false, // 幂运算，ES2016 规范
@@ -219,10 +164,10 @@
     },
     // 计算属性
     computed: {
-      showBabelPlugsBar() {
-        var keys = Object.keys(this.babelParsets);
-        return keys.every(key => !this.babelParsets[key]);
-      }
+      // showBabelPlugsBar() {
+      //   var keys = Object.keys(this.babelPresets);
+      //   return keys.every(key => !this.babelPresets[key]);
+      // }
     },
     components: {
       MagicBar
@@ -230,17 +175,17 @@
     events: {
     },
     watch: {
-      babelOptions: {
-        // 对象和数组要深度 watch
-        handler: _.debounce(function (newOptions) {//函数节流，2s之后才会执行
-          localConfigs.plugs = babelOptions
-          storage.set(STORAGENAME, localConfigs, function (error, data) {
-            //if (error) throw error;
-            if (error) return;//有错误也不抛出
-          });
-        }, 2000),
-        deep: true
-      }
+      // babelOptions: {
+      //   // 对象和数组要深度 watch
+      //   handler: _.debounce(function (newOptions) {//函数节流，2s之后才会执行
+      //     localConfigs.plugs = babelOptions
+      //     storage.set(STORAGENAME, localConfigs, function (error, data) {
+      //       //if (error) throw error;
+      //       if (error) return;//有错误也不抛出
+      //     });
+      //   }, 2000),
+      //   deep: true
+      // }
     },
     created() {
       // 切换到别的页面，再切换回来，这里会被重复执行，而这里的代码只需要执行一次，所以放到 created
@@ -254,8 +199,8 @@
             if (data.plugs) {
               me.babelOptions = data.plugs
             }
-            if (data.parsets) {
-              me.babelParsets = data.parsets
+            if (data.presets) {
+              me.babelPresets = data.presets
             }
           } catch (error) {
           }
@@ -263,16 +208,16 @@
       });
       // 压缩完成 TODO 放到这里也不行， this 改变了
       ipcRenderer.on('tools-async-quick-compile-js-reply', function (event, err, data, oldBytes, newBytes, timer) {//事件源，错误，压缩后的代码，压缩前bytes，压缩后bytes，压缩耗时（ms）
+        console.log(arguments);
         me.loading = false;
         var magicBar = me.$refs.magicBar;
         if (err != null) {
-          magicBar.error(`压缩异常 - 错误行：${err.line}，错误列：${err.col} `);
-          magicBar.error(`错误信息：\n${err.message}`); // \n错误明细：\n${err.stack}
-          me.newCodeSource = '';
+          magicBar.error(`转换异常 - 错误行：${err.loc.line}，错误列：${err.loc.column} `);
+          magicBar.error(`错误信息：\n${err.codeFrame}`); // \n错误明细：\n${err.stack}
           return
         }
         if (data != null) {
-          magicBar.log('压缩完成');
+          magicBar.log('转换完成');
           magicBar.log(`当前体积：${newBytes}byte | 原始体积：${oldBytes}byte`);
           magicBar.log(`比率：${(newBytes / oldBytes * 100).toFixed(2)}%`);
           magicBar.log(`执行时间：${timer} (ms)`);
@@ -292,20 +237,13 @@
         if (this.oldCodeSource.length) {
           var magicBar = this.$refs.magicBar;
           magicBar.clear();
+          this.newCodeSource = '';
           this.loading = true;
-          if (showBabelPlugsBar) {
-            // babel plugs 分支
-            ipcRenderer.send('tools-async-quick-compile-js', {
-              source: this.oldCodeSource,
-              plugins: this.babelOptions
-            });
-          } else {
-            // babel parset 分支
-            ipcRenderer.send('tools-async-quick-compile-js', {
-              source: this.oldCodeSource,
-              parsets: this.babelParsets
-            });
-          }
+          ipcRenderer.send('tools-async-quick-compile-js', {
+            source: this.oldCodeSource,
+            presets: this.babelPresets,
+            plugins: this.babelOptions
+          });
           magicBar.log('正在编译中');
         }
       },

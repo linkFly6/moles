@@ -149,7 +149,7 @@
         </div>
       </div>
       <div class="mb-context">
-        <p v-for="item in messages" :class="{ 'error': item.type === 'error', 'warning': item.type === 'warning' }">{{ item.message }}</p>
+        <pre><p v-for="item in messages" :class="{ 'error': item.type === 'error', 'warning': item.type === 'warning' }">{{ item.message }}</p></pre>
       </div>
     </div>
     <div class="statusBar">

@@ -10,7 +10,7 @@ import tools from './tools';
 var mainWindow = null;
 
 // 当所有窗口被关闭了，退出。
-app.on('window-all-closed', function () {
+app.on('window-all-closed', () => {
   // 在 OS X 上，通常用户在明确地按下 Cmd + Q 之前
   // 应用会保持活动状态
   if (process.platform != 'darwin') {

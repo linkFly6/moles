@@ -1,8 +1,9 @@
 import { ipcMain } from 'electron';//进程通讯模块
 import _ from 'lodash';
-import babel from 'babel-core';
+import * as babel from 'babel-core';
 
-var parsets = [
+// 是 presets 不是 【pa】resets
+var presets = [
   'es2015',
   'es2016',
   'es2017',
@@ -30,7 +31,11 @@ var plugins = {
   destructuring: "babel-plugin-transform-es2015-destructuring",//赋值解构  http://babeljs.io/docs/plugins/transform-es2015-destructuring/
   blockScoping: "babel-plugin-transform-es2015-block-scoping",//let和const块级作用域 http://babeljs.io/docs/plugins/transform-es2015-block-scoping/
   exponentiationOperator: "transform-exponentiation-operator", // 幂运算，ES2016 规范 http://babeljs.io/docs/plugins/transform-exponentiation-operator/
-  transformRuntime:"transform-runtime", // babel 通用模块运行时
+
+
+  // 先就这些属性
+
+  transformRuntime: "transform-runtime", // babel 通用模块运行时
 
   // 特殊需要计算的属性
   modulesCommonjs: "babel-plugin-transform-es2015-modules-commonjs",//编译为commonJS模块&#10;和AMD/UMD编译选项不兼容 http://babeljs.io/docs/plugins/transform-es2015-modules-commonjs/ 
@@ -40,20 +45,35 @@ var plugins = {
 
 
 // TODO 还有两个很重要的包，babel-plugin-transform-runtime 和 babel-polyfill
-function getBabelParset(parsets) {
-   if (!_.isObject(parsets)) return [];
-   
+function getBabelPresets(presets) {
+  if (!_.isObject(presets)) return [];
+  return Object.keys(presets).filter(key => {
+    return presets[key];
+  });
 }
 
 
-// 是不是 Parset 和 plugins 并不互斥？？
-function getBabelPlugins(plugins) {
-
+// 是不是 presets 和 plugins 并不互斥？？
+function getBabelPlugins(options) {
+  if (!_.isObject(options)) return [];
+  return Object.keys(options).map(key => {
+    return options[key] && plugins[key] ? plugins[key] : false;
+  }).filter(plugins => plugins);
 }
 
-function loadBabelConfig(parsets, plugins) {
-
-
+function loadBabelConfig(presets, plugins) {
+  return {
+    // https://babeljs.io/docs/core-packages/
+    presets: getBabelPresets(presets),
+    plugins: getBabelPlugins(plugins),
+    /*
+       默认 babel 通过 codeFrame 抛出异常 ： http://babeljs.io/docs/core-packages/babel-code-frame/
+       codeFrame 抛出的异常是在 shell 下面使用的
+     */
+    highlightCode: false,
+    // 不会尝试自动压缩
+    compact: false
+  };
 }
 
 ipcMain.on('tools-async-quick-compile-js', function (event, arg) {
@@ -65,12 +85,11 @@ ipcMain.on('tools-async-quick-compile-js', function (event, arg) {
       result = null,
       error = null;
     try {
-      result = babel.transform(arg.source,
-        loadBabelConfig(
-          getBabelParset(arg.parsets),
-          getBabelPlugins(arg.plugins)
-        ));
-
+      const config = loadBabelConfig(
+        arg.presets,
+        arg.plugins
+      );
+      result = babel.transform(arg.source, config);
     } catch (e) {
       error = e;
     }

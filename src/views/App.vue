@@ -6,20 +6,6 @@
     height: 100%;
   }
     a { cursor:pointer; }
-
-  /* 设置滚动条的样式 */
-    ::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background-color:#f5f5f5;
-    }
-    /* 滚动条滑块 */
-    ::-webkit-scrollbar-thumb {
-        border-radius: 5px;
-        background: rgba(0,0,0,0.1);
-    }
   
   #app {
     width: 100%;

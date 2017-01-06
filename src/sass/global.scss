@@ -14,7 +14,7 @@ a, button {
 
 //自定义chrome滚动条
 ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
 }
 
 ::-webkit-scrollbar-track-piece {
@@ -33,6 +33,12 @@ a, button {
     background-color: #CCCCCC;
     border-radius: 6px;
 }
+
+  /* 设置滚动条的样式 */
+    ::-webkit-scrollbar-track {
+      background-color:#f5f5f5;
+    }
+
 
 /*#content {
     padding-top: 50px;
