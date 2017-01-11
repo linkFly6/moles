@@ -27,7 +27,10 @@ app.on('ready', function () {
     width: 1100, height: 700,
     minWidth: 1100,
     minHeight: 700,
-    maximizable: true,
+    center: true,
+    // fullscreen: false, // 禁止全屏幕 (隐藏 mac os 的全屏幕按钮)
+    fullscreenable: false, // 在 mac os 上全屏化按钮是否可用
+    maximizable: false, // 禁止最大化
     resizable: false, // 禁止缩放大小
     //autoHideMenuBar: true,
     webPreferences: {
@@ -57,7 +60,7 @@ app.on('ready', function () {
   mainWindow.loadURL(url.format({
     // 在 mac os 下试了 __dirname 和 __filename 都并没有什么卵用
     // pathname: path.join(__dirname, 'dest/views/index.html'),
-    pathname: path.resolve('./', 'dest/views/index.html'),
+    pathname: path.resolve('./', 'dest/views/main.html'),
     protocol: 'file:',
     slashes: true
   }));

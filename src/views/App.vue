@@ -6,18 +6,18 @@
     height: 100%;
   }
     a { cursor:pointer; }
-  
+
   #app {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
   }
-  
+
   #nav {
     z-index: 66;
   }
-  
+
   #content {
     flex: 1;
     width: 100%;

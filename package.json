@@ -72,7 +72,7 @@
     "eslint": "^3.12.2",
     "file-loader": "^0.9.0",
     "gulp": "^3.9.1",
-    "html-webpack-plugin": "^2.24.1",
+    "html-webpack-plugin": "^2.26.0",
     "json-loader": "^0.5.4",
     "keycode": "^2.1.8",
     "node-gyp": "^3.3.1",

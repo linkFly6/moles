@@ -6,7 +6,6 @@ import '../fonts/icon-moles-font.css';
 import '../sass/global.scss';
 import VueRouter from 'vue-router';
 import App from '../views/App';
-import routes from './routers';
 
 
 Vue.use(VueRouter);

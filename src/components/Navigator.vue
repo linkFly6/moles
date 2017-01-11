@@ -171,7 +171,7 @@
   export default {
     data() {
       return {
-        actionName: 'home',
+        actionName: this.$route.matched[0].name,
         isWindows: true
       }
     },
@@ -207,10 +207,11 @@
       },
       toTask() {
         this.actionName = 'task';
+        this.$router.push('/task/index');
       },
-      toBuild() {
-        this.actionName = 'build';
-      },
+      // toBuild() {
+      //   this.actionName = 'build';
+      // },
       toTools() {
         this.actionName = 'tools';
         // this.$router.push({ name: 'compressQuick' });

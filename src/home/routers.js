@@ -1,7 +1,13 @@
 import Home from '../views/Home';
+
 import CompressMenu from '../views/partial/Tools-Menu';
-import QuickCompress from '../views/QuickCompress.vue';
-import QuickCompile from '../views/QuickCompile.vue';
+import QuickCompress from '../views/QuickCompress';
+import QuickCompile from '../views/QuickCompile';
+
+import TaskMenu from '../views/partial/Task-Menu';
+import TaskIndex from '../views/task/';
+import TaskProject from '../views/task/Project';
+
 import Layout from '../components/Layout';
 
 export default
@@ -40,5 +46,28 @@ export default
       //   menu: CompressMenu,
       //   content: CompressQuick
       // }
+    },
+    {
+      path: '/task',
+      name: 'task',
+      component: Layout,
+      children: [
+        {
+          path: 'index',
+          name: 'index',
+          components: {
+            menu: TaskMenu,
+            content: TaskIndex
+          }
+        },
+        {
+          path: 'project',
+          name: 'project',
+          components: {
+            menu: TaskMenu,
+            content: TaskProject
+          }
+        }
+      ]
     }
   ];

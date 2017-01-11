@@ -6,7 +6,8 @@ var css = require('css-loader');
 var config = {
   devtool: 'source-map',// false 关闭调试
   entry: {
-    'app': './src/home/main' // entry 表示入口文件，最终会从这个文件进入，进行打包
+    'main': './src/home/main', // entry 表示入口文件，最终会从这个文件进入，进行打包
+    'settings': './src/home/settings/index'
   },
   output: {
     // 打包后生成的的文件存储位置
@@ -89,10 +90,12 @@ var config = {
     new webpack.NoErrorsPlugin(),
     //修正HTML
     new HtmlWebpackPlugin({
-      filename: '../views/index.html',// 输出的 html 资源路径,相对于 output 路径
+      filename: '../views/main.html',// 输出的 html 资源路径,相对于 output 路径
       template: 'src/index.html',// 模板文件路径，相对于项目根目录
       inject: true,
-      minify: false // 默认不压缩 HTML
+      minify: false, // 默认不压缩 HTML
+      // 只针对 main.js 打包
+      chunks: ['main']
       // minify: {
       //   minifyJS: true,
       //   removeComments: true,
@@ -101,6 +104,14 @@ var config = {
       //   more options:
       //   // https://github.com/kangax/html-minifier#options-quick-reference
       // }
+    }),
+    new HtmlWebpackPlugin({
+      filename: '../views/settings.html',
+      template: 'src/index.html',
+      inject: true,
+      minify: false, 
+      // 只打包 settings
+      chunks: ['settings']
     })
   ],
   eslint: {
