@@ -7,7 +7,7 @@ var config = {
   devtool: 'source-map',// false 关闭调试
   entry: {
     'main': './src/home/main', // entry 表示入口文件，最终会从这个文件进入，进行打包
-    'settings': './src/home/settings/index'
+    'childs-new-project': './src/home/child-windows/index'
   },
   output: {
     // 打包后生成的的文件存储位置
@@ -105,13 +105,14 @@ var config = {
       //   // https://github.com/kangax/html-minifier#options-quick-reference
       // }
     }),
+    // 子窗口
     new HtmlWebpackPlugin({
-      filename: '../views/settings.html',
-      template: 'src/index.html',
+      filename: '../views/childs-new-project.html',
+      template: 'src/childs.html',
       inject: true,
       minify: false, 
-      // 只打包 settings
-      chunks: ['settings']
+      // 只打包 childs-new-project
+      chunks: ['childs-new-project']
     })
   ],
   eslint: {

@@ -30,7 +30,7 @@
   <div class="container-main task-index">
     <div class="main-box">
       <div class="menu-bar">
-        <mu-raised-button label="新建" />
+        <mu-raised-button label="新建"  @click="createNewProject"/>
       </div>
       <div class="layout-context">
       </div>
@@ -71,19 +71,7 @@
     },
     methods: {
       createNewProject() {
-        var win = BrowserWindow({
-          center: true,
-          width: 400,
-          height: 600,
-          maxWidth: 400,
-          height: 600,
-          minimizable: false,
-          maximizable: false,
-          alwaysOnTop: true,
-          fullscreen: false,
-          fullscreenable: false
-        });
-        
+        ipcRenderer.send('settings-async-new-projects-js');
       }
     }
   }

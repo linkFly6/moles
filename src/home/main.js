@@ -6,6 +6,7 @@ import '../fonts/icon-moles-font.css';
 import '../sass/global.scss';
 import VueRouter from 'vue-router';
 import App from '../views/App';
+import routes from './routers';
 
 
 Vue.use(VueRouter);
@@ -17,15 +18,6 @@ const router = new VueRouter({
   // routers  // 我屮艸芔茻！！！！TM 调试了一个小时多，是 routes 不是 routers
   routes
 });
-
-
-// const router = new VueRouter({
-//   hashbang: true,
-//   // history: true,
-//   history: false,
-//   saveScrollPosition: true
-//   // suppressTransitionError: true
-// });
 
 // Router(router);
 

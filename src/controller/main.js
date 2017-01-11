@@ -3,7 +3,8 @@ import { ipcMain } from 'electron';//进程通讯模块
 import path from 'path';
 import url from 'url';
 
-import tools from './tools';
+import tools from './services/tools/';
+import childWindow from './services/child-windows/';
 
 // 保持一个对于 window 对象的全局引用，不然，当 JavaScript 被 GC，
 // window 会被自动地关闭
@@ -58,7 +59,7 @@ app.on('ready', function () {
   // 加载应用的 index.html
   // 'dest/views/index.html'
   mainWindow.loadURL(url.format({
-    // 在 mac os 下试了 __dirname 和 __filename 都并没有什么卵用
+    // #1 在 mac os 下试了 __dirname 和 __filename 都并没有什么卵用， 获取的值永远是 /
     // pathname: path.join(__dirname, 'dest/views/index.html'),
     pathname: path.resolve('./', 'dest/views/main.html'),
     protocol: 'file:',
